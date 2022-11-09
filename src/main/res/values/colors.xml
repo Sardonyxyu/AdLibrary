@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ad_prefix_touming">@android:color/transparent</color>
+    <color name="ad_prefix_black">#000000</color>
+    <color name="ad_prefix_white">#FFFFFF</color>
+    <color name="ad_prefix_blue">#ff0099cc</color>
+</resources>

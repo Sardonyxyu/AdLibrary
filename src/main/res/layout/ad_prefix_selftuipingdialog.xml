@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:theme="@style/ad_prefix_dialog">
+    <TextView
+
+        android:id="@+id/tvMsg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/ad_prefix_white"
+        android:textColor="@color/ad_prefix_black"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="您确定要退出本软件？"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/ad_prefix_dialog">
+
+
+        <ImageView
+            android:id="@+id/my_image_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/ad_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/my_image_view"
+            android:layout_alignTop="@+id/my_image_view"
+            android:background="@mipmap/ad_prefix_selfad_close" />
+
+        <ImageView
+            android:id="@+id/ad_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/my_image_view"
+            android:layout_alignTop="@+id/my_image_view"
+            android:background="@mipmap/ad_prefix_ad_log" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_alignRight="@+id/my_image_view"
+            android:layout_below="@+id/my_image_view"
+            android:layout_gravity="center_horizontal"
+            android:background="#66CCFF" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ad_prefix_white"
+        >
+
+        <Button
+            android:id="@+id/bt_quit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="退出"
+            android:background="@color/ad_prefix_white"
+            android:gravity="center"
+            android:textColor="@color/ad_prefix_black"/>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#66CCFF" />
+
+        <Button
+            android:id="@+id/bt_look"
+            android:background="@color/ad_prefix_white"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textColor="@color/ad_prefix_black"
+            android:gravity="center"
+            android:text="去看看" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

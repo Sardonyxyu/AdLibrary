@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation 'junit:junit:4.12'
+    api 'com.facebook.fresco:fresco:2.3.0'
+    api 'com.facebook.fresco:animated-gif:2.3.0'
+    // 友盟统计SDK
+    api 'com.umeng.umsdk:common:9.5.2'// 必选
+    api 'com.umeng.umsdk:asms:1.6.3'// 必选
+    api 'com.umeng.umsdk:apm:1.7.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.11.0") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
+    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+
+    implementation 'com.pangle.cn:ads-sdk-pro:4.8.0.8'
+
+//    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
+    implementation 'com.qq.e.union:union:+'
+}
+

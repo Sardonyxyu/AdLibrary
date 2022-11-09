@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:theme="@style/ad_prefix_dialog">
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/ad_prefix_white"
+        android:gravity="center"
+        android:text="您确定要退出本软件？"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ad_prefix_white"
+        android:minHeight="180dp">
+
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_gravity="center_horizontal"
+        android:background="#A8A8A8" />
+    <LinearLayout
+        android:id="@+id/lyt_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/bt_quit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/ad_prefix_white"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="@color/ad_prefix_black" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#A8A8A8" />
+
+        <TextView
+            android:id="@+id/bt_look"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/ad_prefix_black"
+            android:background="@color/ad_prefix_white"
+            android:text="去看看" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
