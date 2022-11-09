@@ -13,9 +13,9 @@ public class IData {
 	/**
 	 * 保存apk的
 	 */
-	public static String DEFAULT_APK_CACHE = SDCARD + "/tv1/gps_test/apk/";
+	public static String DEFAULT_APK_CACHE = SDCARD + "/tv1/app/apk/";
 	/**
 	 * 保存公众号等的图片等信息
 	 */
-	public static String DEFAULT_GZH_CACHE = SDCARD + "/tv1/gps_test/gzh/";
+	public static String DEFAULT_GZH_CACHE = SDCARD + "/tv1/app/gzh/";
 }

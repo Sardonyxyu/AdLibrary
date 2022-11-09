@@ -36,7 +36,7 @@ public class DownLoaderAPK {
     private String baseDir = "";
 
     private DownLoaderAPK() {
-        baseDir = context.getCacheDir() + "/tv1/gps_test/apk/";
+        baseDir = context.getCacheDir() + "/tv1/app/apk/";
         EXECUTOR_SERVICE = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
     }
 

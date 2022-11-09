@@ -8,8 +8,6 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -77,6 +75,6 @@ dependencies {
     api 'com.pangle.cn:ads-sdk-pro:4.8.0.8'
 
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    api 'com.qq.e.union:union:+'
+    api 'com.qq.e.union:union:4.492.1362'
 }
 

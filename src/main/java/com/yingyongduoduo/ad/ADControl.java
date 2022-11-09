@@ -934,8 +934,8 @@ public class ADControl {
         lastshowHaopingTime = System.currentTimeMillis();
         isonshow = true;
 
-        new AlertDialog.Builder(context).setTitle("申请开放超级GPS")
-                .setMessage("\t\t在市场给5星好评,24小时内审核即可自动切换到超级GPS模式！")
+        new AlertDialog.Builder(context).setTitle("评论建议")
+                .setMessage("若对本软件有任何想法或建议，欢迎大家到评论区留言，我们会根据大家的意见进行改进。")
                 .setPositiveButton("给个好评", new DialogInterface.OnClickListener() {
 
                     @Override

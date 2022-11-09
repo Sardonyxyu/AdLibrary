@@ -27,6 +27,7 @@ import com.yingyongduoduo.ad.newad.PublicUtil;
 import com.yingyongduoduo.ad.utils.DownLoaderAPK;
 import com.yingyongduoduo.ad.utils.HttpUtil;
 import com.yingyongduoduo.ad.utils.PackageUtil;
+import com.yingyongduoduo.ad.utils.SpUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -91,7 +92,11 @@ public class AppConfig {
      *
      * @param context
      */
-    public static void Init(Context context) {
+    public static void Init(Context context, String application) {
+        // 初始化
+        SpUtils.initSharePreference(context);
+        SpUtils.put("Application", application);
+
         initConfigJson(context);
         initPublicConfigJson(context);
         initselfadJson(context);
@@ -151,7 +156,7 @@ public class AppConfig {
         AppConfig.URL_INDEX_HTML = String.format("%s" + AppConfig.INDEX_HTML_LOCAL_PATH, "file://");
         AppConfig.URL_START_HTML = String.format("%s" + AppConfig.START_HTML_LOCAL_PATH, "file://");
         AppConfig.youkulibPath = context.getCacheDir() + File.separator + "videoparse.jar";// 初始化引擎存放位置
-        AppConfig.GZHPath = context.getCacheDir() + "/tv1/gps_test/gzh/";// 公众号的目录不能用缓存目录
+        AppConfig.GZHPath = context.getCacheDir() + "/tv1/app/gzh/";// 公众号的目录不能用缓存目录
         InitLocal(context);
     }
 
@@ -551,7 +556,7 @@ public class AppConfig {
      * @return
      */
     public static String setConfigData(Context context, String url){
-        String application = "GPSTEST"; // 对应项目
+        String application = (String) SpUtils.get("Application", ""); // 对应项目
         String apppackage = PublicUtil.getAppPackage(context);  // 应用包名
         String appversion = PublicUtil.getVersionCode(context)+""; // 应用版本
         String appmarket = PublicUtil.metadata(context, "UMENG_CHANNEL"); // 应用市场

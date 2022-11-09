@@ -2,6 +2,8 @@ package com.yingyongduoduo.ad.utils;
 
 import android.util.Log;
 
+import com.yingyongduoduo.ad.BuildConfig;
+
 /**
  * 日志类
  * 
@@ -10,8 +12,8 @@ import android.util.Log;
  */
 public class Logger {
 
-	private static final String TAG = "GPSTest";
-	private static boolean DEBUG = false;
+	private static final String TAG = "AdLibrary";
+	private static boolean DEBUG = BuildConfig.DEBUG;
 
 	/**
 	 * 设置是否需要输出日志
