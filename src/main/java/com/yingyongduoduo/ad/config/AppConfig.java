@@ -103,16 +103,6 @@ public class AppConfig {
      * @param context
      */
     public static void Init(Context context, String application) {
-        Init(context, application, false, false);
-    }
-
-    /**
-     * 联网初始化广告配置
-     * 在启动页进行初始化
-     *
-     * @param context
-     */
-    public static void Init(Context context, String application, boolean isInitFm, boolean isInitVideo) {
         // 初始化
         SpUtils.initSharePreference(context);
         SpUtils.put("Application", application);
@@ -122,12 +112,9 @@ public class AppConfig {
         initselfadJson(context);
         initzixunJson(context);
         initwxgzhJson(context);
-
-        if (isInitFm) initfmsourceVersion(context);
-        if (isInitVideo) {
-            initVideoJson(context);
-            initvideosourceVersion(context);
-        }
+        initVideoJson(context);
+        initfmsourceVersion(context);
+        initvideosourceVersion(context);
 
         initADManager(context);
     }
