@@ -33,8 +33,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -67,6 +71,7 @@ public class AppConfig {
      */
     public static String URL_START_HTML;
 
+    public static String fmlibPath; // 收音机反射调用接口JAR包
     public static String youkulibPath;
     public static String GZHPath;
 
@@ -78,6 +83,11 @@ public class AppConfig {
     private final static String baseURLGetPublicconfig = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getpublic?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
     private final static String baseURLGetSelfad = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getselfad?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
     private final static String baseURLGetZixun = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getzixun?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetVideo = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getvideo?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetGzh = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getwxgzh?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetGzhImageURL = "https://api.csdtkj.cn/jsonadconfig/%s/yyddkj.jpg";
+    private final static String baseURLGetVideoparse = "https://api.csdtkj.cn/jsonadconfig/%s/videoparse.jar";
+    private final static String baseURLGetFmparse = "https://api.csdtkj.cn/jsonadconfig/%s/fmparse.jar";
 
     public static ConfigBean configBean;
     public static PublicConfigBean publicConfigBean;
@@ -93,6 +103,16 @@ public class AppConfig {
      * @param context
      */
     public static void Init(Context context, String application) {
+        Init(context, application, false, false);
+    }
+
+    /**
+     * 联网初始化广告配置
+     * 在启动页进行初始化
+     *
+     * @param context
+     */
+    public static void Init(Context context, String application, boolean isInitFm, boolean isInitVideo) {
         // 初始化
         SpUtils.initSharePreference(context);
         SpUtils.put("Application", application);
@@ -101,6 +121,13 @@ public class AppConfig {
         initPublicConfigJson(context);
         initselfadJson(context);
         initzixunJson(context);
+        initwxgzhJson(context);
+
+        if (isInitFm) initfmsourceVersion(context);
+        if (isInitVideo) {
+            initVideoJson(context);
+            initvideosourceVersion(context);
+        }
 
         initADManager(context);
     }
@@ -156,6 +183,7 @@ public class AppConfig {
         AppConfig.URL_INDEX_HTML = String.format("%s" + AppConfig.INDEX_HTML_LOCAL_PATH, "file://");
         AppConfig.URL_START_HTML = String.format("%s" + AppConfig.START_HTML_LOCAL_PATH, "file://");
         AppConfig.youkulibPath = context.getCacheDir() + File.separator + "videoparse.jar";// 初始化引擎存放位置
+        AppConfig.fmlibPath = context.getCacheDir() + File.separator + "fmparse.jar";
         AppConfig.GZHPath = context.getCacheDir() + "/tv1/app/gzh/";// 公众号的目录不能用缓存目录
         InitLocal(context);
     }
@@ -175,11 +203,10 @@ public class AppConfig {
 
         initConfigBean(context);
         initPublicConfigBean(context);
-//        initVideoBean(context);
         initselfadBeans(context);
         initZixunBeans(context);
-//        initwxgzhBeans(context);
-        //initvideosourceVersion(context);这个没有必要初始化
+        initwxgzhBeans(context);
+        initVideoBean(context);
 
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         String appId = mSettings.getString("app_id", "");
@@ -245,6 +272,9 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "nomeinvchannel")) {
                         bean.nomeinvchannel = jo_channelInfo.getString("nomeinvchannel");
                     }
+                    if (haveKey(jo_channelInfo, "noselfadchannel")) {
+                        bean.noselfadchannel = jo_channelInfo.getString("noselfadchannel");
+                    }
                     if (haveKey(jo_channelInfo, "nocpuadchannel")) {
                         bean.nocpuadchannel = jo_channelInfo.getString("nocpuadchannel");
                     }
@@ -296,6 +326,12 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "noadVideowebchannel")) {
                         bean.noadVideowebchannel = jo_channelInfo.getString("noadVideowebchannel");
                     }
+                    if (haveKey(jo_channelInfo, "noadposchannel")) {
+                        bean.noadposchannel = jo_channelInfo.getString("noadposchannel");
+                    }
+                    if (haveKey(jo_channelInfo, "nosearchpaychannel")) {
+                        bean.nosearchpaychannel = jo_channelInfo.getString("nosearchpaychannel");
+                    }
                     bean.playonwebchannel = jo_channelInfo.optString("playonwebchannel");
 
                     if (haveKey(jo_channelInfo, "nogzhchannel")) {
@@ -322,6 +358,9 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "mapnogaode")) {
                         bean.mapnogaode = jo_channelInfo.getString("mapnogaode");
                     }
+                    if (haveKey(jo_channelInfo, "postype")) {
+                        bean.postype = jo_channelInfo.getString("postype");
+                    }
 
                 } else {
                     bean = null;//连channel都没有，这可能是服务器异常
@@ -341,6 +380,9 @@ public class AppConfig {
 
             if (haveKey(jo, "videosourceVersion")) {
                 bean.videosourceVersion = jo.getString("videosourceVersion");
+            }
+            if (haveKey(jo, "fmsourceVersion")) {
+                bean.fmsourceVersion = jo.getString("fmsourceVersion");
             }
             if (haveKey(jo, "selfadVersion")) {
                 bean.selfadVersion = jo.getString("selfadVersion");
@@ -415,6 +457,7 @@ public class AppConfig {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return beans;
     }
@@ -550,18 +593,32 @@ public class AppConfig {
         return getpubConfigJson;
     }
 
+    public static String getApplicationName(){
+        return (String) SpUtils.get("Application", "");
+    }
+
     /**
      * 设置配置参数
      * @param url
      * @return
      */
     public static String setConfigData(Context context, String url){
-        String application = (String) SpUtils.get("Application", ""); // 对应项目
+        String application = getApplicationName(); // 对应项目
         String apppackage = PublicUtil.getAppPackage(context);  // 应用包名
         String appversion = PublicUtil.getVersionCode(context)+""; // 应用版本
         String appmarket = PublicUtil.metadata(context, "UMENG_CHANNEL"); // 应用市场
         String agencychannel = PublicUtil.metadata(context, "AGENCY_CHANNEL"); // 代理渠道
         return String.format(url, application, apppackage, appversion, appmarket, agencychannel);
+    }
+
+    /**
+     * 设置配置参数
+     * @param url
+     * @return
+     */
+    public static String setConfigFileUrl(String url){
+        String application = getApplicationName(); // 对应项目
+        return String.format(url, application);
     }
 
     public static void initConfigJson(Context context) {
@@ -618,7 +675,7 @@ public class AppConfig {
 
         String VideoJson = "";
         try {
-            VideoJson = new HttpUtil().getJson(url);
+            VideoJson = HttpUtil.getJson(url);
             List<VideoBean> currentVideoBeans = getVideoBean(VideoJson);
             if (currentVideoBeans.size() == 0) {
                 VideoJson = "";
@@ -630,6 +687,35 @@ public class AppConfig {
         return VideoJson;
     }
 
+    public static void initVideoJson(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        if (publicConfigBean != null && !"".equals(publicConfigBean.onlineVideoParseVersion) && !publicConfigBean.onlineVideoParseVersion.equals(mSettings.getString("onlineVideoParseVersion", ""))) {//需要更新videosourceVersion
+            String VideoJson = getVideoJson(setConfigData(context, baseURLGetVideo));
+            if (!VideoJson.isEmpty()) {
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("VideoJson", VideoJson);
+                editor.putString("onlineVideoParseVersion", publicConfigBean.onlineVideoParseVersion);
+                editor.apply();
+            }
+        }
+        initVideoBean(context);
+    }
+
+    public static void initVideoBean(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+
+        String VideoJson = mSettings.getString("VideoJson", "");
+        try {
+            List<VideoBean> currentOnlineMenuInfos = getVideoBean(VideoJson);
+            if (currentOnlineMenuInfos.size() == 0) {
+                VideoJson = "";
+            }
+            videoBeans = currentOnlineMenuInfos;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static String getSelfadJson(String url) {
         String SelfadJson = "";
         try {
@@ -639,6 +725,7 @@ public class AppConfig {
                 SelfadJson = "";
             }
         } catch (IOException e) {
+            e.printStackTrace();
             SelfadJson = "";
         }
         return SelfadJson;
@@ -754,6 +841,105 @@ public class AppConfig {
         }
     }
 
+    public static void initvideosourceVersion(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        Boolean isneedUpdate = publicConfigBean != null && !"".equals(publicConfigBean.videosourceVersion) && !publicConfigBean.videosourceVersion.equals(mSettings.getString("videosourceVersion", ""));
+        if (isneedUpdate || (!(new File(youkulibPath).exists()) && publicConfigBean != null && !"".equals(publicConfigBean.videosourceVersion))) {//需要更新videosourceVersion 或者没有在目录下找到该jar,但是获取
+            Boolean isSuccess = true;
+            try {
+                downloadjar(youkulibPath, setConfigFileUrl(baseURLGetVideoparse));
+            } catch (Exception e1) {
+                isSuccess = false;
+                e1.printStackTrace();
+            }
+            if (isSuccess) {
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("videosourceVersion", publicConfigBean.videosourceVersion);
+                editor.apply();
+            } else {
+                deleteFile(youkulibPath);
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("videosourceVersion", "");
+                editor.apply();
+            }
+        }
+    }
+
+    public static void initfmsourceVersion(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        boolean isneedUpdate = publicConfigBean != null && !"".equals(publicConfigBean.fmsourceVersion) && !publicConfigBean.fmsourceVersion.equals(mSettings.getString("fmsourceVersion", ""));
+        if (isneedUpdate || (!(new File(fmlibPath).exists()) && publicConfigBean != null && !"".equals(publicConfigBean.fmsourceVersion))) {//需要更新videosourceVersion 或者没有在目录下找到该jar,但是获取
+            boolean isSuccess = true;
+            try {
+                downloadjar(fmlibPath, setConfigFileUrl(baseURLGetFmparse));
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                copyLocal(context, fmlibPath);
+                isSuccess = false;
+            }
+            if (isSuccess) {
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("fmsourceVersion", publicConfigBean.fmsourceVersion);
+                editor.apply();
+            } else {
+                deleteFile(fmlibPath);
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("fmsourceVersion", "");
+                editor.apply();
+            }
+        }
+    }
+
+    public static void downloadjar(String filePath, String jarUrl) throws Exception {
+        deleteFile(filePath);// 如果存在就先删除
+        URL url = new URL(jarUrl);
+        URLConnection con = url.openConnection();
+        int contentLength = con.getContentLength();
+        InputStream is = con.getInputStream();
+        byte[] bs = new byte[1024];
+        int len;
+        OutputStream os = new FileOutputStream(filePath);
+        while ((len = is.read(bs)) != -1) {
+            os.write(bs, 0, len);
+        }
+        os.close();
+        is.close();
+
+    }
+
+    private static void copyLocal(Context context, String dexpath) {
+        InputStream is = null;
+        OutputStream outputStream = null;
+        try {
+            is = context.getAssets().open("fmparse.jar");
+            outputStream = new FileOutputStream(dexpath);
+            byte[] buffer = new byte[1024];
+            int byteCount = 0;
+            while ((byteCount = is.read(buffer)) != -1) {// 循环从输入流读取
+                // buffer字节
+                outputStream.write(buffer, 0, byteCount);// 将读取的输入流写入到输出流
+            }
+            outputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public static void deleteFile(String filePath) {
         try {
             File file = new File(filePath);
@@ -761,13 +947,112 @@ public class AppConfig {
                 file.delete();
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
+    }
 
+    private static String getWXGZHJson(String url) {
+        String wxgzhJson = "";
+        try {
+            wxgzhJson = HttpUtil.getJson(url);
+            List<WXGZHBean> currentSelfAdBeans = getWXGZHBeans(wxgzhJson);
+            if (currentSelfAdBeans.size() == 0) {
+                wxgzhJson = "";
+            }
+        } catch (IOException e) {
+            wxgzhJson = "";
+        }
+        return wxgzhJson;
     }
 
 
+    public static void initwxgzhJson(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        if (publicConfigBean != null && !"".equals(publicConfigBean.wxgzhversion) && !publicConfigBean.wxgzhversion.equals(mSettings.getString("wxgzhversion", ""))) {//需要更新
+            String wxgzhJson = getWXGZHJson(setConfigData(context, baseURLGetGzh));
+            if (!wxgzhJson.isEmpty()) {
+                List<WXGZHBean> currentSelfAdBeans = getWXGZHBeans(wxgzhJson);
+                for (WXGZHBean bean : currentSelfAdBeans) {
+                    initGZHPic(bean);
+                }
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("wxgzhJson", wxgzhJson);
+                editor.putString("wxgzhversion", publicConfigBean.wxgzhversion);
+                editor.apply();
+            }
+        }
+        String wxgzhJson = mSettings.getString("wxgzhJson", "");
+        List<WXGZHBean> currentSelfAdBeans = getWXGZHBeans(wxgzhJson);
+        for (WXGZHBean bean : currentSelfAdBeans) {
+            // Boolean isSuccess = true;//成功与否不重要，不成功的不用就是
+            if (!new File(GZHPath + bean.id + ".jpg").exists()) {//如果文件不存在
+                initGZHPic(bean);
+            }
+        }
+        initwxgzhBeans(context);//初始化之后需要判断图片是否存在
+    }
+
+    private static void initGZHPic(WXGZHBean bean) {
+        try {
+            downloadgzhjpg(bean, setConfigFileUrl(baseURLGetGzhImageURL));
+        } catch (Exception e) {//这一步则表示下载失败
+            deleteFile(GZHPath + bean.id + ".jpg");
+            e.printStackTrace();
+        }
+    }
+
+    public static void downloadgzhjpg(WXGZHBean bean, String jpgurl) throws Exception {
+        deleteFile(GZHPath + bean.id + ".jpg");// 如果存在就先删除
+        File file = new File(GZHPath);
+        if (!file.exists()) file.mkdirs();
+        URL url = new URL(jpgurl);
+        URLConnection con = url.openConnection();
+        int contentLength = con.getContentLength();
+        InputStream is = con.getInputStream();
+        byte[] bs = new byte[1024];
+        int len;
+        OutputStream os = new FileOutputStream(GZHPath + bean.id + ".jpg");
+        while ((len = is.read(bs)) != -1) {
+            os.write(bs, 0, len);
+        }
+        os.close();
+        is.close();
+
+    }
+
+    public static void initwxgzhBeans(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        String wxgzhJson = mSettings.getString("wxgzhJson", "");
+        try {
+            List<WXGZHBean> currentSelfAdBeans = getWXGZHBeans(wxgzhJson);
+            if (currentSelfAdBeans.size() == 0) {
+                wxgzhJson = "";
+            }
+            wxgzhBeans = currentSelfAdBeans;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static boolean haveKey(JSONObject jo, String key) {
         return jo.has(key) && !jo.isNull(key);
+    }
+
+    /**
+     *
+     * 是否展示在线视频，针对底部的channel
+     * */
+    public static boolean isShowOnlineVideo() {
+        if (configBean == null)
+            return false;
+        if(TextUtils.isEmpty(configBean.noaddvideochannel))
+            return false;
+        for (String version :
+                configBean.noaddvideochannel.split(",")) {
+            if (version.equals(versioncode))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -788,6 +1073,43 @@ public class AppConfig {
         return true;
     }
 
+    public static boolean isShowWXGZH() {
+        if (configBean == null){
+            return false;
+        }
+        for (String version :
+                configBean.nogzhchannel.split(",")) {
+            if (version.equals(versioncode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isShowMeinv() {
+        if (configBean == null) {
+            return false;
+        }
+        for (String version :
+                configBean.nomeinvchannel.split(",")) {
+            if (version.equals(versioncode)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isShowSelfAD() {
+        if (configBean == null){
+            return false;
+        }
+        for (String version : configBean.noselfadchannel.split(",")) {
+            if (version.equals(versioncode)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public static boolean isFengxiang() {
         if (configBean == null) {
@@ -920,6 +1242,8 @@ public class AppConfig {
         if (configBean == null) {
             return false;
         }
+        if(TextUtils.isEmpty(configBean.noshowdschannel))
+            return false;
         for (String version : configBean.noshowdschannel.split(",")) {
             if (version.equals(versioncode)) {
                 return false;
@@ -1067,6 +1391,117 @@ public class AppConfig {
         }
         return "csj";
 
+    }
+
+    /**
+     * 是否展示消息流广告
+     *
+     * @return
+     */
+    public static boolean isShowPosAD() {
+        if (configBean == null)//如果configbean都没有获取到
+            return false;
+        if (TextUtils.isEmpty(configBean.noadposchannel))
+            return false;
+        for (String version : configBean.noadposchannel.split(",")) {
+            if (version.equals(versioncode))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * 搜索是否需要付费
+     * @return
+     */
+    public static boolean isSearchPay() {
+        if(configBean == null) {
+            return false;
+        }
+        for(String version : configBean.nosearchpaychannel.split(",")) {
+            if(version.equals(versioncode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String getPOSType() {
+        if (configBean == null)
+            return "";
+        for (String str : configBean.postype.split(",")) {
+            String[] a = str.split(":");
+            if (a.length == 2) {
+                String versionItem = a[0];
+                String adNameItem = a[1];
+                if (versioncode.equals(versionItem))//平台与版本对应了，因为渠道已经选定了
+                    return adNameItem;
+
+            }
+        }
+        return "";
+    }
+
+    //是否使用第三方链接对当前播放地址进行处理，针对vip等情况
+    public static boolean isNoadVideoweb(String platform) {
+        if (configBean == null || TextUtils.isEmpty(platform))
+            return false;
+        for (String str : configBean.noadVideowebchannel.split(",")) {
+            String[] a = str.split(":");
+            if (a.length == 2) {
+                String platformItem = a[0];
+                String versionItem = a[1];
+                if (platform.equals(platformItem) && versioncode.equals(versionItem))//平台与版本对应了，因为渠道已经选定了
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    //获取第三方去广告的基地址
+    public static String getnoadVideowebBaseUrl(String platform, String url) {
+        if (videoBeans == null || videoBeans.size() == 0 || TextUtils.isEmpty(platform))
+            return url;
+        if (!isNoadVideoweb(platform))
+            return url;
+        for (VideoBean bean : AppConfig.videoBeans) {
+            if (bean.platform.equals(platform)) {
+                if (bean.noadVideowebBaseUrl.contains("%s"))
+                    return String.format(bean.noadVideowebBaseUrl, url);
+                else
+                    return url;
+            }
+        }
+        return url;
+    }
+
+    //是否通过浏览器进行播放，这里涉及两个开关，一个在videojson里面（总开关），一个在config里面（渠道开关）
+    public static boolean isPlayOnweb(String platform) {
+        System.out.println("当前频道:" + platform);
+        if (videoBeans == null || videoBeans.size() == 0 || TextUtils.isEmpty(platform))
+            return false;
+        for (VideoBean bean : AppConfig.videoBeans) {
+            if (bean.platform.equals(platform)) {
+                if ("1".equals(bean.playonbroswer)) //为1则表示用web播放,为0表示总开关没有设置一定要用web播放
+                {
+                    return true;
+                } else {
+                    break;
+                }
+            }
+        }
+        if (configBean == null)
+            return false;
+        for (String str : configBean.playonwebchannel.split(",")) {
+            String[] a = str.split(":");
+            if (a.length == 2) {
+                String platformItem = a[0];
+                String versionItem = a[1];
+                if (platform.equals(platformItem) && versioncode.equals(versionItem))//平台与版本对应了，因为渠道已经选定了
+                    return true;
+            }
+        }
+        return false;
     }
 
     private static List<Integer> GetRandomList(int size, int max) {
@@ -1218,4 +1653,14 @@ public class AppConfig {
 
     }
 
+    public static Boolean ISInistallSelfAD(String packageName) {
+        for (ADBean selfad : selfadBeans) {//过滤掉已经安装了的app
+            if (TextUtils.equals(packageName, selfad.getAd_packagename())) {
+                return true;
+            }
+
+        }
+        return false;
+
+    }
 }

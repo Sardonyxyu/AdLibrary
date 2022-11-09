@@ -5,6 +5,7 @@ package com.yingyongduoduo.ad.bean;
  */
 public class PublicConfigBean {
     public String videosourceVersion = "";//当前会加载那些视频渠道的视频
+    public String fmsourceVersion = "";//当前会加载那些视频渠道的Fm
     public String selfadVersion = "";
     public String zixunVersion = "";
     public String dashangContent = "";

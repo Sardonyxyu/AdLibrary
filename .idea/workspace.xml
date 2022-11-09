@@ -10,21 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6812a97d-05f8-4fc7-8eff-8978cc009f80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/SpUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/ADControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/ADControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/ConfigBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/PublicConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/PublicConfigBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/DownLoaderAPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/DownLoaderAPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/IData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/IData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/Logger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667976424065</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1、修改广点通广告为最新版本&#10;2、修改好评提示&#10;3、添加init初始化时添加application名字">
+      <created>1667982833460</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667982833460</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,6 +111,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="修改1" />
     <MESSAGE value="改为v4版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="改为v4版本" />
+    <MESSAGE value="1、修改广点通广告为最新版本&#10;2、修改好评提示&#10;3、添加init初始化时添加application名字" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、修改广点通广告为最新版本&#10;2、修改好评提示&#10;3、添加init初始化时添加application名字" />
   </component>
 </project>

@@ -11,15 +11,18 @@ public class ConfigBean {
     public Map<String, String> ad_tp_idMap = new HashMap<String, String>();
     public String cpuidorurl = "";//baidu的内容联盟的链接或者id，如果是链接，直接解析
     public String nomeinvchannel = "";
+    public String noselfadchannel = "";
     public String nocpuadchannel = "";//没有内容联盟内容的渠道
     public String nofenxiang = "";
     public String nosearch = "";
     public String nohaoping = "";
+    public String nosearchpaychannel = "";//没有付费搜索的版本
     public String noadbannerchannel = "";//没广告条的版本
     public String noadkpchannel = "";//没有开屏的版本
     public String noadtpchannel = "";//没有开屏的版本
     public String noadcpchannel = "";//没有插屏的版本
     public String nopaychannel = "";//不用付费的版本
+    public String noadposchannel = "";//没有消息流的版本
     public String isfirstfreeusechannel = "";//首次免费版本
     public String showselflogochannel = "";//没有LOGO遮挡的版本
     public String greythemechannel = "";//全局灰色主题
@@ -36,6 +39,7 @@ public class ConfigBean {
     public String cptype = "";
     public String kptype = "";
     public String tptype = "";
+    public String postype = "";
 
     public String nozhikouling = "";//没有吱口令的渠道
 }
