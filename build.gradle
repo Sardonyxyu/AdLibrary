@@ -59,6 +59,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
+    api 'com.android.support:support-v4:27.1.1'
     api 'com.facebook.fresco:fresco:2.3.0'
     api 'com.facebook.fresco:animated-gif:2.3.0'
     // 友盟统计SDK
@@ -66,16 +67,16 @@ dependencies {
     api 'com.umeng.umsdk:asms:1.6.3'// 必选
     api 'com.umeng.umsdk:apm:1.7.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
 
-    implementation "com.github.bumptech.glide:glide:4.11.0"
-    implementation ("com.github.bumptech.glide:recyclerview-integration:4.11.0") {
+    api "com.github.bumptech.glide:glide:4.9.0"
+    api ("com.github.bumptech.glide:recyclerview-integration:4.9.0") {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
-    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
 
-    implementation 'com.pangle.cn:ads-sdk-pro:4.8.0.8'
+    api 'com.pangle.cn:ads-sdk-pro:4.8.0.8'
 
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    implementation 'com.qq.e.union:union:+'
+    api 'com.qq.e.union:union:+'
 }
 
