@@ -19,12 +19,20 @@
         </provider>
 
         <meta-data
+            android:name="AGENCY_CHANNEL"
+            android:value="${AGENCY_CHANNEL}" />
+        <meta-data
             android:name="UMENG_APPKEY"
             android:value="${UMENG_APPKEY}" />
-
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL}" />
+        <meta-data
+            android:name="COMPANY_NAME"
+            android:value="${COMPANY_NAME}" />
+        <meta-data
+            android:name="KEFU_QQ"
+            android:value="\${KEFU_QQ}" />
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"

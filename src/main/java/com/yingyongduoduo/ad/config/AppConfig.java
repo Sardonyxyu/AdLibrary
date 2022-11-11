@@ -28,6 +28,7 @@ import com.yingyongduoduo.ad.utils.DownLoaderAPK;
 import com.yingyongduoduo.ad.utils.HttpUtil;
 import com.yingyongduoduo.ad.utils.PackageUtil;
 import com.yingyongduoduo.ad.utils.SpUtils;
+import com.yingyongduoduo.ad.utils.StringUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -247,6 +248,14 @@ public class AppConfig {
                     bean.ad_tp_idMap.put(key, jo_ad_banner_id.getString(key));
                 }
             }
+            if (haveKey(jo, "ad_shiping_id")) {
+                JSONObject jo_ad_banner_id = jo.getJSONObject("ad_shiping_id");
+                Iterator<String> keys = jo_ad_banner_id.keys();
+                while (keys.hasNext()) { // 只要一个
+                    String key = keys.next();
+                    bean.ad_shiping_idMap.put(key, jo_ad_banner_id.getString(key));
+                }
+            }
             if (haveKey(jo, "cpuidorurl")) {
                 bean.cpuidorurl = jo.getString("cpuidorurl");
             }
@@ -288,6 +297,12 @@ public class AppConfig {
                     }
                     if (haveKey(jo_channelInfo, "noadcpchannel")) {
                         bean.noadcpchannel = jo_channelInfo.getString("noadcpchannel");
+                    }
+                    if (haveKey(jo_channelInfo, "noshipingadchannel")) {
+                        bean.noshipingadchannel = jo_channelInfo.getString("noshipingadchannel");
+                    }
+                    if (haveKey(jo_channelInfo, "nodownloadtaskchannel")) {
+                        bean.nodownloadtaskchannel = jo_channelInfo.getString("nodownloadtaskchannel");
                     }
                     if (haveKey(jo_channelInfo, "nopaychannel")) {
                         bean.nopaychannel = jo_channelInfo.getString("nopaychannel");
@@ -347,6 +362,9 @@ public class AppConfig {
                     }
                     if (haveKey(jo_channelInfo, "postype")) {
                         bean.postype = jo_channelInfo.getString("postype");
+                    }
+                    if (haveKey(jo_channelInfo, "shipingtype")) {
+                        bean.shipingtype = jo_channelInfo.getString("shipingtype");
                     }
 
                 } else {
@@ -1239,6 +1257,47 @@ public class AppConfig {
         return true;
     }
 
+    /**
+     * 是否展示视频广告
+     * @return
+     */
+    public static boolean isShowShiping() {
+        if (configBean == null) {
+            return false;
+        }
+        for (String version : configBean.noshipingadchannel.split(",")) {
+            if (version.equals(versioncode)) {
+                return false;
+            }
+        }
+        String spType = AppConfig.getShipingType();
+        String sp_String = AppConfig.configBean.ad_shiping_idMap.get(spType);
+        if (TextUtils.isEmpty(sp_String) || sp_String.split(",").length != 2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * 是否展示下载任务
+     * @return
+     */
+    public static boolean isShowDownloadTask() {
+        if (configBean == null) {
+            return false;
+        }
+        if (StringUtil.isEmpty(configBean.nodownloadtaskchannel)) {
+            return false;
+        }
+        for (String version : configBean.nodownloadtaskchannel.split(",")) {
+            if (version.equals(versioncode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static boolean isShowUpdate() {
         if (configBean == null) {
             return false;
@@ -1378,6 +1437,24 @@ public class AppConfig {
         }
         return "csj";
 
+    }
+
+    public static String getShipingType() {
+        if (configBean == null) {
+            return "csj";
+        }
+        for (String str : configBean.shipingtype.split(",")) {
+            String[] a = str.split(":");
+            if (a.length == 2) {
+                String versionItem = a[0];
+                String adNameItem = a[1];
+                if (versioncode.equals(versionItem)) {//平台与版本对应了，因为渠道已经选定了
+                    return adNameItem;
+                }
+
+            }
+        }
+        return "csj";
     }
 
     /**

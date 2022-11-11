@@ -1,4 +1,4 @@
-package com.yingyongduoduo.ad.interfaceimpl;
+package com.yingyongduoduo.ad.interfaces;
 
 import android.content.Context;
 import android.os.CountDownTimer;

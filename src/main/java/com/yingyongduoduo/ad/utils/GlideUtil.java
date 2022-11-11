@@ -8,7 +8,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.yingyongduoduo.ad.R;
-import com.yingyongduoduo.ad.interfaceimpl.GlideRoundTransform;
+import com.yingyongduoduo.ad.interfaces.GlideRoundTransform;
 
 public class GlideUtil {
 

@@ -17,7 +17,7 @@ import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.comm.util.AdError;
 import com.yingyongduoduo.ad.ADControl;
 import com.yingyongduoduo.ad.R;
-import com.yingyongduoduo.ad.interfaceimpl.SelfBannerAdListener;
+import com.yingyongduoduo.ad.interfaces.SelfBannerAdListener;
 
 import java.util.List;
 import java.util.Random;

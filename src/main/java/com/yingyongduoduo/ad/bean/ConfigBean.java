@@ -9,6 +9,7 @@ public class ConfigBean {
     public Map<String, String> ad_kp_idMap = new HashMap<String, String>();
     public Map<String, String> ad_cp_idMap = new HashMap<String, String>();
     public Map<String, String> ad_tp_idMap = new HashMap<String, String>();
+    public Map<String, String> ad_shiping_idMap = new HashMap<String, String>();
     public String cpuidorurl = "";//baidu的内容联盟的链接或者id，如果是链接，直接解析
     public String nomeinvchannel = "";
     public String noselfadchannel = "";
@@ -22,6 +23,8 @@ public class ConfigBean {
     public String noadtpchannel = "";//没有开屏的版本
     public String noadcpchannel = "";//没有插屏的版本
     public String nopaychannel = "";//不用付费的版本
+    public String noshipingadchannel = "";//没有视频广告的版本
+    public String nodownloadtaskchannel = "";//没有下载任务的版本
     public String noadposchannel = "";//没有消息流的版本
     public String isfirstfreeusechannel = "";//首次免费版本
     public String showselflogochannel = "";//没有LOGO遮挡的版本
@@ -40,6 +43,7 @@ public class ConfigBean {
     public String kptype = "";
     public String tptype = "";
     public String postype = "";
+    public String shipingtype = "";
 
     public String nozhikouling = "";//没有吱口令的渠道
 }

@@ -10,16 +10,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6812a97d-05f8-4fc7-8eff-8978cc009f80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_common_1_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_collections_28_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_28_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/AdRewardVideoListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/StringUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/ADControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/ADControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/bean/ConfigBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/GDTMuBanTuiPingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/GDTMuBanTuiPingDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/SelfCPDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/SelfCPDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/SelfTuiPingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/dialog/SelfTuiPingDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/ADListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/ADListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/GlideRoundTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/GlideRoundTransform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/SelfBannerAdListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/SelfBannerAdListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/SelfBannerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/SelfBannerView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/SelfKPAdListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/SelfKPAdListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaceimpl/SelfKPView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/interfaces/SelfKPView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/GlideUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/utils/GlideUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +101,7 @@
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.yingyongduoduo.ad.utils" />
+      <recent name="com.yingyongduoduo.ad.interfaces" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -106,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667990707055</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本">
+      <created>1667997149613</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667997149613</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,6 +168,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
@@ -126,6 +176,7 @@
     <MESSAGE value="改为v4版本" />
     <MESSAGE value="1、修改广点通广告为最新版本&#10;2、修改好评提示&#10;3、添加init初始化时添加application名字" />
     <MESSAGE value="添加视频、公众号、收音机配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加视频、公众号、收音机配置" />
+    <MESSAGE value="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本" />
   </component>
 </project>

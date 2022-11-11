@@ -14,6 +14,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,13 +27,17 @@ import com.bytedance.sdk.openadsdk.CSJAdError;
 import com.bytedance.sdk.openadsdk.CSJSplashAd;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdDislike;
+import com.bytedance.sdk.openadsdk.TTAdLoadType;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.qq.e.ads.banner2.UnifiedBannerADListener;
 import com.qq.e.ads.banner2.UnifiedBannerView;
 import com.qq.e.ads.interstitial2.UnifiedInterstitialAD;
 import com.qq.e.ads.interstitial2.UnifiedInterstitialADListener;
+import com.qq.e.ads.rewardvideo.RewardVideoAD;
+import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
@@ -42,15 +47,18 @@ import com.yingyongduoduo.ad.dialog.GDTMuBanTuiPingDialog;
 import com.yingyongduoduo.ad.dialog.SelfCPDialog;
 import com.yingyongduoduo.ad.dialog.SelfTuiPingDialog;
 import com.yingyongduoduo.ad.dialog.UpdateDialog;
-import com.yingyongduoduo.ad.interfaceimpl.ADListener;
-import com.yingyongduoduo.ad.interfaceimpl.SelfBannerAdListener;
-import com.yingyongduoduo.ad.interfaceimpl.SelfBannerView;
-import com.yingyongduoduo.ad.interfaceimpl.SelfKPAdListener;
-import com.yingyongduoduo.ad.interfaceimpl.SelfKPView;
+import com.yingyongduoduo.ad.interfaces.ADListener;
+import com.yingyongduoduo.ad.interfaces.AdRewardVideoListener;
+import com.yingyongduoduo.ad.interfaces.SelfBannerAdListener;
+import com.yingyongduoduo.ad.interfaces.SelfBannerView;
+import com.yingyongduoduo.ad.interfaces.SelfKPAdListener;
+import com.yingyongduoduo.ad.interfaces.SelfKPView;
+import com.yingyongduoduo.ad.utils.Logger;
 import com.yingyongduoduo.ad.utils.ScreenUtils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -77,6 +85,285 @@ public class ADControl {
         editor.putString("addrversion", newVersion);
         editor.apply();
         ADControl.oldADVersition = newVersion;
+    }
+
+    /**
+     * 显示激励视频
+     * @param activity
+     * @param listener
+     */
+    public void showShiping(final Activity activity, final AdRewardVideoListener listener) {
+        if (AppConfig.isShowShiping()) { //展示激励视频
+            String spType = AppConfig.getShipingType();//获取开屏广告类型，baidu，gdt，google
+            String sp_String = AppConfig.configBean.ad_shiping_idMap.get(spType);
+
+            if (!TextUtils.isEmpty(sp_String)) {
+                String[] a = sp_String.split(",");
+                if (a.length == 2) {
+                    String appid = a[0];
+                    String adplaceid = a[1];
+                    if ("csj".equals(spType)) {
+                        showCsjVideo(activity, appid, adplaceid, listener);
+                    } else if ("gdt".equals(spType)) {
+                        showGdtVideoAd(activity, appid, adplaceid, listener);
+                    } else {
+                        listener.onError(-100, "没有支持的广告类型");
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 显示穿山甲激励视频
+     * @param activity
+     * @param listener
+     */
+    public void showCsjVideo(final Activity activity, String appid, String codeId, final AdRewardVideoListener listener){
+
+        final String TAG = "showCsjVideo";
+        //step3:创建TTAdNative对象,用于调用广告请求接口
+        TTAdNative mTTAdNative = TTAdManagerHolder.get().createAdNative(activity);
+
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(codeId)
+                //此次加载广告的用途是实时加载，当用来作为缓存时，请使用：TTAdLoadType.PRELOAD
+                .setAdLoadType(TTAdLoadType.LOAD)
+                .build();
+
+        mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
+            @Override
+            public void onError(int code, String message) {
+                Logger.error(TAG, "Callback --> onError: " + code + ", " + message);
+                showCsjVideoError(code, message, activity, listener);
+            }
+
+            //视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
+            @Override
+            public void onRewardVideoCached() {
+                Logger.error(TAG, "Callback --> onRewardVideoCached");
+            }
+
+            @Override
+            public void onRewardVideoCached(TTRewardVideoAd ad) {
+                Logger.error(TAG, "Callback --> onRewardVideoCached");
+            }
+
+            //视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
+            @Override
+            public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
+                Logger.error(TAG, "Callback --> onRewardVideoAdLoad");
+
+                TTRewardVideoAd mttRewardVideoAd = ad;
+                mttRewardVideoAd.setRewardAdInteractionListener(new TTRewardVideoAd.RewardAdInteractionListener() {
+
+                    @Override
+                    public void onAdShow() {
+                        // 广告的展示回调
+                        Logger.error(TAG, "Callback --> rewardVideoAd show");
+                    }
+
+                    @Override
+                    public void onAdVideoBarClick() {
+                        // 广告下载bar点击回调
+                        Logger.error(TAG, "Callback --> rewardVideoAd bar click");
+                    }
+
+                    @Override
+
+                    public void onAdClose() {
+                        // 广告关闭回调
+                        Logger.error(TAG, "Callback --> rewardVideoAd close");
+                    }
+
+                    //视频播放完成回调
+                    @Override
+                    public void onVideoComplete() {
+                        // 视频播放完成回调
+                        Logger.error(TAG, "Callback --> rewardVideoAd complete");
+                    }
+
+                    @Override
+                    public void onVideoError() {
+                        // 视频播放异常回调
+                        Logger.error(TAG, "Callback -->  rewardPlayAgain error");
+                        showCsjVideoError(-100, "视频播放异常，请重试", activity, listener);
+                    }
+
+                    //视频播放完成后，奖励验证回调，rewardVerify：是否有效，rewardAmount：奖励梳理，rewardName：奖励名称
+                    @Override
+                    public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName, int errorCode, String errorMsg) {
+                        String logString = "verify:" + rewardVerify + " amount:" + rewardAmount +
+                                " name:" + rewardName + " errorCode:" + errorCode + " errorMsg:" + errorMsg;
+                        Logger.error(TAG, "Callback --> " + logString);
+                        if (rewardVerify) {
+                            // 领取奖励
+                            listener.onReceiveAward();
+                        } else {
+                            showCsjVideoError(errorCode, errorMsg, activity, listener);
+                        }
+                    }
+
+                    @Override
+                    public void onRewardArrived(boolean isRewardValid, int rewardType, Bundle extraInfo) {
+                        Logger.error(TAG, "Callback --> rewardVideoAd has onRewardArrived " +
+                                "\n奖励是否有效：" + isRewardValid +
+                                "\n奖励类型：" + rewardType);
+                    }
+
+                    @Override
+                    public void onSkippedVideo() {
+                        // 跳过视频播放回调
+                        Logger.error(TAG, "Callback --> rewardVideoAd has onSkippedVideo");
+                    }
+                });
+
+                if (mttRewardVideoAd != null) {
+                    //step6:在获取到广告后展示,强烈建议在onRewardVideoCached回调后，展示广告，提升播放体验
+                    //该方法直接展示广告
+//                    mttRewardVideoAd.showRewardVideoAd(RewardVideoActivity.this);
+
+                    //展示广告，并传入广告展示的场景
+                    mttRewardVideoAd.showRewardVideoAd(activity, TTAdConstant.RitScenes.CUSTOMIZE_SCENES, "scenes_test");
+                    mttRewardVideoAd = null;
+                }
+            }
+        });
+    }
+
+    private void showCsjVideoError(int code, String message, Activity activity, AdRewardVideoListener listener) {
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+            listener.onError(-100, "Activity已关闭");
+            return;
+        }
+        if (AppConfig.getShipingType().equals("csj")) {
+            String id_String = AppConfig.configBean.ad_shiping_idMap.get("gdt");
+            if (!TextUtils.isEmpty(id_String) && id_String.split(",").length == 2) {
+                String[] a = id_String.split(",");
+                String appid = a[0];
+                String adplaceid = a[1];
+                showGdtVideoAd(activity, appid, adplaceid, listener);
+            } else {
+                listener.onError(code, message);
+            }
+        } else {
+            listener.onError(code, message);
+        }
+    }
+
+    private RewardVideoAD rewardVideoAD;
+
+    /**
+     * 激励视频广告
+     *
+     * @param activity
+     * @param appid
+     * @param adplaceid
+     */
+    private void showGdtVideoAd(final Activity activity, String appid, String adplaceid, final AdRewardVideoListener listener) {
+        if (rewardVideoAD == null || rewardVideoAD.hasShown()) {
+            rewardVideoAD = new RewardVideoAD(activity.getApplicationContext(), adplaceid, new RewardVideoADListener() {
+                @Override
+                public void onADLoad() {
+                    boolean isShow = false;
+                    // 3. 展示激励视频广告
+                    if (rewardVideoAD != null) {//广告展示检查1：广告成功加载，此处也可以使用videoCached来实现视频预加载完成后再展示激励视频广告的逻辑
+                        if (!rewardVideoAD.hasShown()) {//广告展示检查2：当前广告数据还没有展示过
+                            long delta = 1000;//建议给广告过期时间加个buffer，单位ms，这里demo采用1000ms的buffer
+                            //广告展示检查3：展示广告前判断广告数据未过期
+//                            if (SystemClock.elapsedRealtime() < (rewardVideoAD.getExpireTimestamp() - delta)) {
+                            isShow = true;
+                            rewardVideoAD.showAD(activity);
+//                            }
+//                        else {
+//                            Toast.makeText(this, "激励视频广告已过期，请再次请求广告后进行广告展示！", Toast.LENGTH_LONG).show();
+//                        }
+//                            rewardVideoAD.showAD(activity);
+                        } else {
+//                        Toast.makeText(this, "此条广告已经展示过，请再次请求广告后进行广告展示！", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    if (!isShow) {
+                        showGdtVideoError(-100, "显示广点通视频失败", activity, listener);
+                    }
+
+                }
+
+                @Override
+                public void onVideoCached() {
+
+                }
+
+                @Override
+                public void onADShow() {
+
+                }
+
+                @Override
+                public void onADExpose() {
+                    Log.e("ADControl", "showRewardVideoAd onADExpose");
+                }
+
+                @Override
+                public void onReward(Map<String, Object> map) {
+                    if (listener != null)
+                        listener.onReceiveAward();
+                }
+
+                @Override
+                public void onADClick() {
+
+                }
+
+                @Override
+                public void onVideoComplete() {
+
+                }
+
+                @Override
+                public void onADClose() {
+
+                }
+
+                @Override
+                public void onError(AdError adError) {
+                    rewardVideoAD = null;
+                    showGdtVideoError(adError.getErrorCode(), adError.getErrorMsg(), activity, listener);
+                }
+            }, true);
+            // 2. 加载激励视频广告
+            rewardVideoAD.loadAD();
+        } else {
+            long delta = 1000;//建议给广告过期时间加个buffer，单位ms，这里demo采用1000ms的buffer
+            //广告展示检查3：展示广告前判断广告数据未过期
+//            if (SystemClock.elapsedRealtime() < (rewardVideoAD.getExpireTimestamp() - delta)) {
+            rewardVideoAD.showAD(activity);
+//            } else {
+//                if (kpAdListener != null)
+//                    kpAdListener.onAdFailed("激励视频播放失败");
+//                rewardVideoAD = null;
+//            }
+        }
+    }
+
+    private void showGdtVideoError(int errorCode, String errorMes, Activity activity, AdRewardVideoListener listener) {
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+            listener.onError(-100, "Activity已关闭");
+            return;
+        }
+        if (AppConfig.getShipingType().equals("gdt")) {
+            String id_String = AppConfig.configBean.ad_shiping_idMap.get("csj");
+            if (!TextUtils.isEmpty(id_String) && id_String.split(",").length == 2) {
+                String[] a = id_String.split(",");
+                String appid = a[0];
+                String adplaceid = a[1];
+                showCsjVideo(activity, appid, adplaceid, listener);
+            } else {
+                listener.onError(errorCode, errorMes);
+            }
+        } else {
+            listener.onError(errorCode, errorMes);
+        }
     }
 
     private void ShowCSJKP(final Activity context, final RelativeLayout adsParent, final View skip_view, final ADListener kpAdListener, String appid, String adplaceid) {

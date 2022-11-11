@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.yingyongduoduo.ad.R;
 import com.yingyongduoduo.ad.bean.ADBean;
 import com.yingyongduoduo.ad.config.AppConfig;
-import com.yingyongduoduo.ad.interfaceimpl.SelfBannerAdListener;
+import com.yingyongduoduo.ad.interfaces.SelfBannerAdListener;
 import com.yingyongduoduo.ad.utils.GlideUtil;
 
 import java.util.List;
