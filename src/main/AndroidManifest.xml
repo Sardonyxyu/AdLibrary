@@ -32,12 +32,6 @@
         <meta-data
             android:name="KEFU_QQ"
             android:value="\${KEFU_QQ}" />
-        <meta-data
-            android:name="CSJ_APPLOG_APPID"
-            android:value="\${CSJ_APPLOG_APPID}" />
-        <meta-data
-            android:name="CSJ_CONFIG"
-            android:value="${CSJ_CONFIG}" />
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"

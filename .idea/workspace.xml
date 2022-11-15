@@ -10,33 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6812a97d-05f8-4fc7-8eff-8978cc009f80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_bytedance_applog_RangersAppLog_Lite_cn_6_10_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_bytedance_frameworks_encryptor_0_0_9_rc_2_private_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_bytedance_mpaas_if_encryptor_1_0_0_rc_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_pangle_cn_pangrowth_dpsdk_3_8_0_4_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_pangle_cn_pangrowth_sdk_2_7_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__de_greenrobot_eventbus_3_0_0_beta1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/event/ShortVideoInitSucceedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/media/DPHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/media/MediaInitHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_27_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_27_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AdLibrary.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/TTAdManagerHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/TTAdManagerHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/xml/ad_prefix_file_path.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/xml/ad_prefix_file_path.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/xml/file_paths.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/xml/file_paths.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +46,7 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/yingyongduoduo/ad" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PSApp-NewServer" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -135,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667997149613</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="兼容播放器添加穿山甲短视频功能">
+      <created>1668494930737</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668494930737</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +138,7 @@
     <MESSAGE value="1、修改广点通广告为最新版本&#10;2、修改好评提示&#10;3、添加init初始化时添加application名字" />
     <MESSAGE value="添加视频、公众号、收音机配置" />
     <MESSAGE value="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本" />
+    <MESSAGE value="兼容播放器添加穿山甲短视频功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="兼容播放器添加穿山甲短视频功能" />
   </component>
 </project>
