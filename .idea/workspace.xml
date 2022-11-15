@@ -46,7 +46,7 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PSApp-NewServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ChildrenEnglish" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -116,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668494930737</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="去掉CSJ_APPLOG_APPID和CSJ_CONFIG两个配置，否则配置中不加上会报错">
+      <created>1668508502234</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668508502234</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +146,7 @@
     <MESSAGE value="添加视频、公众号、收音机配置" />
     <MESSAGE value="1、support-v4改为28.0.0版本&#10;2、com.facebook.fresco改为1.12.0版本" />
     <MESSAGE value="兼容播放器添加穿山甲短视频功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="兼容播放器添加穿山甲短视频功能" />
+    <MESSAGE value="去掉CSJ_APPLOG_APPID和CSJ_CONFIG两个配置，否则配置中不加上会报错" />
+    <option name="LAST_COMMIT_MESSAGE" value="去掉CSJ_APPLOG_APPID和CSJ_CONFIG两个配置，否则配置中不加上会报错" />
   </component>
 </project>

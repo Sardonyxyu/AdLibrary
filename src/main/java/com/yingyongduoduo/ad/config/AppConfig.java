@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bytedance.applog.AppLog;
 import com.bytedance.applog.InitConfig;
 import com.bytedance.applog.util.UriConstants;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.qq.e.comm.managers.GDTAdSdk;
 import com.yingyongduoduo.ad.TTAdManagerHolder;
 import com.yingyongduoduo.ad.bean.ADBean;
@@ -108,6 +109,8 @@ public class AppConfig {
      */
     public static void Init(Context context, String application) {
         // 初始化
+        initData(context);
+
         SpUtils.initSharePreference(context);
         SpUtils.put("Application", application);
 
@@ -121,6 +124,17 @@ public class AppConfig {
         initvideosourceVersion(context);
 
         initADManager(context);
+    }
+
+    /**
+     *
+     * @param context
+     */
+    private static void initData(Context context){
+        // 初始化SDK
+        Fresco.initialize(context);
+
+        initLocalConfig(context);
     }
 
     private static void initADManager(Context context) {
