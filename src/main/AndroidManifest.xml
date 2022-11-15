@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="com.yingyongduoduo.ad">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -33,6 +32,12 @@
         <meta-data
             android:name="KEFU_QQ"
             android:value="\${KEFU_QQ}" />
+        <meta-data
+            android:name="CSJ_APPLOG_APPID"
+            android:value="\${CSJ_APPLOG_APPID}" />
+        <meta-data
+            android:name="CSJ_CONFIG"
+            android:value="${CSJ_CONFIG}" />
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
@@ -46,6 +51,10 @@
         <provider
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
             android:authorities="${applicationId}.TTMultiProvider"
+            android:exported="false" />
+        <provider
+            android:name="com.bytedance.sdk.dp.act.DPProvider"
+            android:authorities="${applicationId}.BDDPProvider"
             android:exported="false" />
     </application>
 

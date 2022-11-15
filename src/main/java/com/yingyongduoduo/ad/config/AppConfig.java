@@ -14,6 +14,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bytedance.applog.AppLog;
+import com.bytedance.applog.InitConfig;
+import com.bytedance.applog.util.UriConstants;
 import com.qq.e.comm.managers.GDTAdSdk;
 import com.yingyongduoduo.ad.TTAdManagerHolder;
 import com.yingyongduoduo.ad.bean.ADBean;
@@ -185,6 +188,35 @@ public class AppConfig {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 初始化穿山甲VideoAppLog
+     * @param context
+     */
+    public static void initCSJVideoAppLog(Context context) {
+        String appId = PublicUtil.metadata(context, "CSJ_APPLOG_APPID");
+        if (TextUtils.isEmpty(appId)) {
+            return;
+        }
+        String umengChannel = PublicUtil.metadata(context, "UMENG_CHANNEL");
+        if ("360".equals(umengChannel)) {
+            umengChannel = "c360"; //友盟规定不要使用纯数字作为渠道ID
+        }
+        /* 初始化开始，appid和渠道，appid如不清楚请联系客户成功经理
+         * 注意第二个参数 channel 不能为空
+         */
+        final InitConfig config = new InitConfig(appId, umengChannel);
+        //上报地址
+        config.setUriConfig (UriConstants.DEFAULT);
+        // 加密开关，SDK 5.5.1 及以上版本支持，false 为关闭加密，上线前建议设置为 true
+        AppLog.setEncryptAndCompress(true);
+
+        config.setAutoStart(true);
+        /* 初始化结束 */
+        config.setAutoStart(true);
+
+        AppLog.init(context, config);
     }
 
     public static void InitLocal(Context context) {
@@ -1243,7 +1275,7 @@ public class AppConfig {
         return false;
     }
 
-    public static boolean isShowDS() {
+    public static boolean isShowDs() {
         if (configBean == null) {
             return false;
         }
@@ -1612,10 +1644,6 @@ public class AppConfig {
 
     public static void openAD(final Context context, final ADBean adbean, String tag) {//如果本条是广告
         if (context == null || adbean == null) return;
-//        Map<String, String> map_ekv = new HashMap<String, String>();
-//        map_ekv.put("click", adbean.getAd_name());
-        
-
 
         int type = adbean.getAd_type();
         if (type == 1)//下载

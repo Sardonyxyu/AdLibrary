@@ -4,7 +4,7 @@
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":" />
-        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="4.1.3" />
         <option name="LAST_KNOWN_AGP_VERSION" value="4.1.3" />
       </configuration>
     </facet>
@@ -63,6 +63,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:28.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:disklrucache:4.9.0" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:annotations:4.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: de.greenrobot:eventbus:3.0.0-beta1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:fresco:1.12.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:animated-gif:1.12.0@aar" level="project" />
@@ -70,11 +71,13 @@
     <orderEntry type="library" name="Gradle: com.umeng.umsdk:apm:1.7.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:glide:4.9.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:recyclerview-integration:4.9.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.pangle.cn:ads-sdk-pro:4.8.0.8@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.qq.e.union:union:4.492.1362@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.pangle.cn:ads-sdk-pro:4.8.0.8@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.pangle.cn:pangrowth-sdk:2.7.0.5@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.bytedance.applog:RangersAppLog-Lite-cn:6.10.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment:28.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:loader:28.0.0@aar" level="project" />
@@ -85,7 +88,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:customview:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:swiperefreshlayout:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:asynclayoutinflater:28.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:27.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-compat:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:gifdecoder:4.9.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:versionedparcelable:28.0.0@aar" level="project" />
@@ -105,5 +108,8 @@
     <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-base:1.12.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:nativeimagefilters:1.12.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:nativeimagetranscoder:1.12.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.bytedance.frameworks:encryptor:0.0.9-rc.2-private@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.bytedance.mpaas:if_encryptor:1.0.0-rc.5@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.pangle.cn:pangrowth-dpsdk:3.8.0.4@aar" level="project" />
   </component>
 </module>
