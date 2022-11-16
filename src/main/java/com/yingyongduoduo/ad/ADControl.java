@@ -682,6 +682,8 @@ public class ADControl {
                         String appid = a[0];
                         String adplaceid = a[1];
                         ShowGDTCP2(context, appid, adplaceid);
+                    } else {
+                        ShowSelfCP(context);
                     }
                 } else {
                     ShowSelfCP(context);
@@ -818,6 +820,8 @@ public class ADControl {
                         String appid = a[0];
                         String adplaceid = a[1];
                         showCSJNewCp(context, appid, adplaceid);
+                    } else {
+                        ShowSelfCP(context);
                     }
                 } else {
                     ShowSelfCP(context);
@@ -963,6 +967,8 @@ public class ADControl {
                             String appid = a[0];
                             String adplaceid = a[1];
                             addGDTBanner2(lyt, context, appid, adplaceid);
+                        } else {
+                            addSelfBanner(lyt, context);
                         }
                     } else {
                         addSelfBanner(lyt, context);
@@ -1047,6 +1053,8 @@ public class ADControl {
                             String appid = a[0];
                             String adplaceid = a[1];
                             addCSJBanner(lyt, context, appid, adplaceid);
+                        } else {
+                            addSelfBanner(lyt, context);
                         }
                     } else {
                         addSelfBanner(lyt, context);
