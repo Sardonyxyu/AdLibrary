@@ -683,10 +683,10 @@ public class ADControl {
                         String adplaceid = a[1];
                         ShowGDTCP2(context, appid, adplaceid);
                     } else {
-                        ShowSelfCP(context);
+                        showSelfCpControl(context);
                     }
                 } else {
-                    ShowSelfCP(context);
+                    showSelfCpControl(context);
                 }
             }
 
@@ -737,65 +737,6 @@ public class ADControl {
     }
 
 
-    private void ShowCSJCP(final Activity context, String appid, String adplaceid) {
-        TTAdNative mTTAdNative = TTAdManagerHolder.get().createAdNative(context);
-
-        int i = new Random(100).nextInt();
-
-        //step4:创建广告请求参数AdSlot,具体参数含义参考文档
-        AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(adplaceid) //广告位id
-                .setAdCount(1) //请求广告数量为1到3条
-//                .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP) // 应用每次下载都需要触发弹窗披露应用信息（不含跳转商店的场景），该配置优先级高于下载网络弹窗配置；
-                // 300 * 300，300 * 450，450 * 300
-//                .setExpressViewAcceptedSize(i > 50 ? 300 : 450, i > 50 ? 300 : 450) //期望模板广告view的size,单位dp
-                .setExpressViewAcceptedSize(300, 300) //期望模板广告view的size,单位dp
-                .build();
-        //step5:请求广告，对请求回调的广告作渲染处理
-        mTTAdNative.loadInteractionExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
-            @Override
-            public void onError(int code, String message) {
-                Log.e("ADControl", "loadInteractionExpressAd onError : " + message);
-            }
-
-            @Override
-            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
-                if (ads == null || ads.size() == 0) {
-                    return;
-                }
-                mInterAd = ads.get(0);
-                if (mInterAd == null)
-                    return;
-
-                mInterAd.setExpressInteractionListener(new TTNativeExpressAd.AdInteractionListener() {
-                    @Override
-                    public void onAdDismiss() {
-
-                    }
-
-                    @Override
-                    public void onAdClicked(View view, int type) {
-                    }
-
-                    @Override
-                    public void onAdShow(View view, int type) {
-                    }
-
-                    @Override
-                    public void onRenderFail(View view, String msg, int code) {
-                    }
-
-                    @Override
-                    public void onRenderSuccess(View view, float width, float height) {
-                        if (context != null && !context.isFinishing() && mInterAd != null)
-                            mInterAd.showInteractionExpressAd(context);
-                    }
-                });
-                mInterAd.render();
-            }
-        });
-    }
-
     private void ShowGDTCP2(final Activity context, String appid, String adplaceid) {
         interAd = getIAD(context, appid, adplaceid, new UnifiedInterstitialADListener() {
             @Override
@@ -821,10 +762,10 @@ public class ADControl {
                         String adplaceid = a[1];
                         showCSJNewCp(context, appid, adplaceid);
                     } else {
-                        ShowSelfCP(context);
+                        showSelfCpControl(context);
                     }
                 } else {
-                    ShowSelfCP(context);
+                    showSelfCpControl(context);
                 }
             }
 
@@ -878,6 +819,15 @@ public class ADControl {
         return interAd;
     }
 
+    /**
+     * 控制是否显示自身插屏
+     * @param context
+     */
+    private void showSelfCpControl(Context context){
+        if (AppConfig.isCommonServer) return;
+        ShowSelfCP(context);
+    }
+
     private void ShowSelfCP(final Context context) {
         SelfCPDialog sfCP = new SelfCPDialog(context);
         sfCP.setADListener(new SelfBannerAdListener() {
@@ -920,8 +870,6 @@ public class ADControl {
                     String adplaceid = a[1];
                     if ("csj2".equals(cpType)) {
                         showCSJNewCp(context, appid, adplaceid);
-                    } else if ("csj".equals(cpType)) {
-                        ShowCSJCP(context, appid, adplaceid);
                     } else if ("gdt2".equals(cpType)) {
                         ShowGDTCP2(context, appid, adplaceid);
                     } else if ("self".equals(cpType)) {
@@ -931,7 +879,7 @@ public class ADControl {
                     }
                 }
             } else {
-                ShowSelfCP(context);
+                showSelfCpControl(context);
             }
         }
     }
@@ -968,10 +916,10 @@ public class ADControl {
                             String adplaceid = a[1];
                             addGDTBanner2(lyt, context, appid, adplaceid);
                         } else {
-                            addSelfBanner(lyt, context);
+                            addSelfBannerControl(lyt, context);
                         }
                     } else {
-                        addSelfBanner(lyt, context);
+                        addSelfBannerControl(lyt, context);
                     }
                 }
 
@@ -1054,10 +1002,10 @@ public class ADControl {
                             String adplaceid = a[1];
                             addCSJBanner(lyt, context, appid, adplaceid);
                         } else {
-                            addSelfBanner(lyt, context);
+                            addSelfBannerControl(lyt, context);
                         }
                     } else {
-                        addSelfBanner(lyt, context);
+                        addSelfBannerControl(lyt, context);
                     }
                 }
 
@@ -1110,6 +1058,11 @@ public class ADControl {
 
     public void addGoogleBanner(final LinearLayout lyt, final Activity context, String appid, String adplaceid) {
         lyt.removeAllViews();
+    }
+
+    public void addSelfBannerControl(LinearLayout lyt, Activity context){
+        if (AppConfig.isCommonServer) return;
+        addSelfBanner(lyt, context);
     }
 
     public void addSelfBanner(LinearLayout lyt, final Activity context) {
@@ -1177,7 +1130,7 @@ public class ADControl {
                     }
                 }
             } else {
-                addSelfBanner(lyt, context);
+                addSelfBannerControl(lyt, context);
             }
         }
     }
