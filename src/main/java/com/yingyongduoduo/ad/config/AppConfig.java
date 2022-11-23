@@ -113,8 +113,8 @@ public class AppConfig {
      * @param context
      * @param adAddressType
      */
-    public static void Init(Context context, String adAddressType) {
-        Init(context, adAddressType, "", true);
+    public static void init(Context context, String adAddressType) {
+        init(context, adAddressType, "", true);
     }
 
     /**
@@ -122,8 +122,8 @@ public class AppConfig {
      * @param context
      * @param application
      */
-    public static void InitDongTing(Context context, String application) {
-        Init(context, "", application, false);
+    public static void initDongTing(Context context, String application) {
+        init(context, "", application, false);
     }
 
     /**
@@ -132,7 +132,7 @@ public class AppConfig {
      * @param application
      * @param isCommonServer
      */
-    public static void Init(Context context, String adAddressType, String application, boolean isCommonServer) {
+    public static void init(Context context, String adAddressType, String application, boolean isCommonServer) {
 
         AppConfig.isCommonServer = isCommonServer;
         // 初始化广告数据
@@ -173,7 +173,7 @@ public class AppConfig {
         Fresco.initialize(context);
         SpUtils.initSharePreference(context);
 
-        initLocalConfig(context);
+        initConfig(context);
     }
 
     /**
@@ -216,7 +216,7 @@ public class AppConfig {
      *
      * @param context
      */
-    public static void initLocalConfig(Context context) {
+    public static void initConfig(Context context) {
         ApplicationInfo appInfo;
         try {
             AppConfig.isCanShowBanner = true;
@@ -276,7 +276,11 @@ public class AppConfig {
         AppLog.init(context, config);
     }
 
-    public static void InitLocal(Context context) {
+    /**
+     * 初始化本地数据广告
+     * @param context
+     */
+    public static void initLocalData(Context context) {
 
         initConfigBean(context);
         initPublicConfigBean(context);
