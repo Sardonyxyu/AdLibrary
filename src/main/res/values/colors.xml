@@ -3,5 +3,6 @@
     <color name="ad_prefix_touming">@android:color/transparent</color>
     <color name="ad_prefix_black">#000000</color>
     <color name="ad_prefix_white">#FFFFFF</color>
-    <color name="ad_prefix_blue">#ff0099cc</color>
+    <color name="ad_prefix_blue">#0A90E3</color>
+    <color name="ad_prefix_blue_dark">#0A7CC3</color>
 </resources>

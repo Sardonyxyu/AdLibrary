@@ -3,10 +3,8 @@ package com.yingyongduoduo.ad;
 import static com.bytedance.sdk.openadsdk.TTAdLoadType.PRELOAD;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -43,6 +41,7 @@ import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
 import com.yingyongduoduo.ad.bean.ADBean;
 import com.yingyongduoduo.ad.config.AppConfig;
+import com.yingyongduoduo.ad.dialog.DialogTextViewBuilder;
 import com.yingyongduoduo.ad.dialog.GDTMuBanTuiPingDialog;
 import com.yingyongduoduo.ad.dialog.SelfCPDialog;
 import com.yingyongduoduo.ad.dialog.SelfTuiPingDialog;
@@ -56,10 +55,8 @@ import com.yingyongduoduo.ad.interfaces.SelfKPView;
 import com.yingyongduoduo.ad.utils.Logger;
 import com.yingyongduoduo.ad.utils.ScreenUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 
 public class ADControl {
@@ -70,10 +67,8 @@ public class ADControl {
 
     public static Boolean isonshow = false;
     private static boolean ISGiveHaoping = false;
-    private static HashMap<String, String> giveHaoping = new HashMap<String, String>();
 
     //展示5分好评广告，首次进来不展示，和插屏广告戳开，隔间10秒
-    private static long divideTime = 8L * 1000L;
     private static long showadTimeDuration = 120 * 1000;
     private static long lastshowHaopingTime = System.currentTimeMillis();
 
@@ -170,7 +165,6 @@ public class ADControl {
                     }
 
                     @Override
-
                     public void onAdClose() {
                         // 广告关闭回调
                         Logger.error(TAG, "Callback --> rewardVideoAd close");
@@ -1182,23 +1176,22 @@ public class ADControl {
         lastshowHaopingTime = System.currentTimeMillis();
         isonshow = true;
 
-        new AlertDialog.Builder(context).setTitle("评论建议")
-                .setMessage("若对本软件有任何想法或建议，欢迎大家到评论区留言，我们会根据大家的意见进行改进。")
-                .setPositiveButton("给个好评", new DialogInterface.OnClickListener() {
-
+        new DialogTextViewBuilder.Builder(context, "评论建议", "若对本软件有任何想法或建议，欢迎大家到评论区留言，我们会根据大家的意见进行改进。", "留言")
+                .isCancelable()
+                .twoButton("以后再说")
+                .listener(new DialogTextViewBuilder.DialogOnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void oneClick() {
                         setISGiveHaoping(context, true);
                         goodPinglun(context);
                         isonshow = false;
                     }
-                }).setNeutralButton("以后再说", new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                isonshow = false;
-            }
-        }).setCancelable(false).show();
+                    @Override
+                    public void twoClick() {
+                        isonshow = false;
+                    }
+                }).build(false);
     }
 
 

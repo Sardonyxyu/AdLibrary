@@ -7,7 +7,7 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -63,9 +63,9 @@ dependencies {
     api 'com.facebook.fresco:fresco:1.12.0'
     api 'com.facebook.fresco:animated-gif:1.12.0'
     // 友盟统计SDK
-    api 'com.umeng.umsdk:common:9.5.2'// 必选
+    api 'com.umeng.umsdk:common:9.5.4'// 必选
     api 'com.umeng.umsdk:asms:1.6.3'// 必选
-    api 'com.umeng.umsdk:apm:1.7.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+    api 'com.umeng.umsdk:apm:1.8.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
 
     api "com.github.bumptech.glide:glide:4.9.0"
     api ("com.github.bumptech.glide:recyclerview-integration:4.9.0") {
@@ -77,12 +77,12 @@ dependencies {
     implementation 'de.greenrobot:eventbus:3+'
 
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    api 'com.qq.e.union:union:4.492.1362'
+    api 'com.qq.e.union:union:4.500.1370'
 
-    api 'com.pangle.cn:ads-sdk-pro:4.9.0.8'
+    api 'com.pangle.cn:ads-sdk-pro:5.0.0.3'
 
     api 'com.bytedance.applog:RangersAppLog-Lite-cn:6.10.0'
-    api ('com.pangle.cn:pangrowth-sdk:2.9.0.4'){
+    api ('com.pangle.cn:pangrowth-sdk:3.1.0.1'){
         exclude group: 'com.pangle.cn', module: 'partner-live-sdk'
         exclude group: 'com.pangle.cn', module: 'pangrowth-novel-sdk'
         exclude group: 'com.pangle.cn', module: 'pangrowth-game-sdk'
