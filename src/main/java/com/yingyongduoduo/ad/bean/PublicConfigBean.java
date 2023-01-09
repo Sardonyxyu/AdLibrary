@@ -20,9 +20,10 @@ public class PublicConfigBean {
     public String googlestreetip = "";
 
     public String qqKey = "";//baidu内容联盟广告id
-    public String  Information="";//显示的加QQ信息
-    public String  fenxiangInfo="";//分享应用的URL链接
-    public String  searchbaiduworld="";//百度地图搜索境外地理信息
+    public String Information="";//显示的加QQ信息
+    public String fenxiangInfo="";//分享应用的URL链接
+    public String searchbaiduworld="";//百度地图搜索境外地理信息
+    public String searchbaidudomestic = "";  // 百度地图搜索国内位置
 
     //引擎
     public String zhikouling="";

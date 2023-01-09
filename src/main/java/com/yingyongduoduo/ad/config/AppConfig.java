@@ -523,6 +523,9 @@ public class AppConfig {
             if (haveKey(jo, "searchbaiduworld")) {
                 bean.searchbaiduworld = jo.getString("searchbaiduworld");
             }
+            if (haveKey(jo, "searchbaidudomestic")) {
+                bean.searchbaidudomestic = jo.getString("searchbaidudomestic");
+            }
             if (haveKey(jo, "zhikouling")) {
                 bean.zhikouling = jo.getString("zhikouling");
             }
@@ -1423,6 +1426,20 @@ public class AppConfig {
             }
         }
         return true;
+    }
+
+    public static boolean isContainer(String url) {
+        if (TextUtils.isEmpty(url)) return false;
+        if (AppConfig.publicConfigBean != null && !TextUtils.isEmpty(AppConfig.publicConfigBean.regionurl)) {
+            String[] mConfigUrl = AppConfig.publicConfigBean.regionurl.split(",");
+            for (int i = 0; i < mConfigUrl.length; i++) {
+                String s = mConfigUrl[i];
+                if (url.contains(s)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isNeedPay() {

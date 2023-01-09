@@ -132,3 +132,13 @@
 -keep class com.ss.android.**{*;}
 -keep class com.bytedance.android.**{*;}
 -keep class com.byted.live.**{*;}
+
+-keep class com.ad.android.** {*;}
+
+-keepclassmembers class com.bytedance.android.alog.Alog {
+    native <methods>;
+}
+-keepclassmembers class com.bytedance.android.alog.Alog {
+    native <methods>;
+}
+
