@@ -30,8 +30,7 @@ import java.util.Objects;
 /**
  * Created by Sardonyxyu on 2018/3/9.
  */
-
-public class DialogTextViewBuilder {
+public class DialogTextViewBuilderAD {
     private String title;
     private String content;
     private int titleSize;
@@ -50,7 +49,7 @@ public class DialogTextViewBuilder {
     private View dialogView;
     private boolean isCancel;
 
-    public DialogTextViewBuilder(Builder builder) {
+    public DialogTextViewBuilderAD(Builder builder) {
         this.ctx = builder.ctx;
         this.title = builder.title;
         this.content = builder.content;
@@ -270,7 +269,7 @@ public class DialogTextViewBuilder {
          * @param isCanceledOnTouchOutside 点击对话框外是否关闭对话框
          * @return
          */
-        public DialogTextViewBuilder build(boolean isCanceledOnTouchOutside) {
+        public DialogTextViewBuilderAD build(boolean isCanceledOnTouchOutside) {
             setButton();
             alertDialog = dialogBuilder.create();
             if (!isCanceledOnTouchOutside) {
@@ -290,7 +289,7 @@ public class DialogTextViewBuilder {
                 }
             }
             alertDialog.show();
-            return new DialogTextViewBuilder(this);
+            return new DialogTextViewBuilderAD(this);
         }
 
         /**
@@ -322,7 +321,7 @@ public class DialogTextViewBuilder {
 
         private void setView(int view) {
             if (view == -100) {
-                dialogView = LayoutInflater.from(ctx).inflate(R.layout.dialog_base_textview, null);
+                dialogView = LayoutInflater.from(ctx).inflate(R.layout.ad_dialog_base_textview, null);
             } else {
                 dialogView = LayoutInflater.from(ctx).inflate(view, null);
             }

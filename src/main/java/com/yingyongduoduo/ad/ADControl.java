@@ -41,7 +41,7 @@ import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
 import com.yingyongduoduo.ad.bean.ADBean;
 import com.yingyongduoduo.ad.config.AppConfig;
-import com.yingyongduoduo.ad.dialog.DialogTextViewBuilder;
+import com.yingyongduoduo.ad.dialog.DialogTextViewBuilderAD;
 import com.yingyongduoduo.ad.dialog.GDTMuBanTuiPingDialog;
 import com.yingyongduoduo.ad.dialog.SelfCPDialog;
 import com.yingyongduoduo.ad.dialog.SelfTuiPingDialog;
@@ -1176,10 +1176,10 @@ public class ADControl {
         lastshowHaopingTime = System.currentTimeMillis();
         isonshow = true;
 
-        new DialogTextViewBuilder.Builder(context, "评论建议", "若对本软件有任何想法或建议，欢迎大家到评论区留言，我们会根据大家的意见进行改进。", "留言")
+        new DialogTextViewBuilderAD.Builder(context, "评论建议", "若对本软件有任何想法或建议，欢迎大家到评论区留言，我们会根据大家的意见进行改进。", "留言")
                 .isCancelable()
                 .twoButton("以后再说")
-                .listener(new DialogTextViewBuilder.DialogOnClickListener(){
+                .listener(new DialogTextViewBuilderAD.DialogOnClickListener(){
                     @Override
                     public void oneClick() {
                         setISGiveHaoping(context, true);
