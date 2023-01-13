@@ -85,6 +85,7 @@ public class AppConfig {
     public static String APPKEY = "";
 
     public static boolean isUmengIdConfig = true; // 是否是友盟id配置广告
+    public static boolean isShowSelfAd = false; // 是否显示自身广告
 
     private final static String baseURL1 = "http://120.25.224.76/%s/";
     private final static String baseURL2 = "http://videodata.gz.bcebos.com/%s/";
@@ -117,7 +118,7 @@ public class AppConfig {
         // 初始化广告数据
         initData(context);
         SpUtils.put("AdAddressType", adAddressType);
-        init(context, true);
+        init(context, true, false);
     }
 
     /**
@@ -129,7 +130,7 @@ public class AppConfig {
         // 初始化广告数据
         initData(context);
         SpUtils.put("ServerAddress", "https://api.xgkjdytt.cn");
-        initPackage(context, application);
+        initPackage(context, application, false);
     }
 
     /**
@@ -141,7 +142,7 @@ public class AppConfig {
         // 初始化广告数据
         initData(context);
         SpUtils.put("ServerAddress", "https://api.csdtkj.cn");
-        initPackage(context, application);
+        initPackage(context, application, true);
     }
 
     /**
@@ -149,9 +150,9 @@ public class AppConfig {
      * @param context
      * @param application
      */
-    public static void initPackage(Context context, String application) {
+    public static void initPackage(Context context, String application, boolean isShowSelfAd) {
         SpUtils.put("Application", application);
-        init(context, false);
+        init(context, false, isShowSelfAd);
     }
 
     /**
@@ -159,8 +160,9 @@ public class AppConfig {
      * @param context
      * @param isUmengIdConfig
      */
-    private static void init(Context context, boolean isUmengIdConfig) {
+    private static void init(Context context, boolean isUmengIdConfig, boolean isShowSelfAd) {
         AppConfig.isUmengIdConfig = isUmengIdConfig;
+        AppConfig.isShowSelfAd = isShowSelfAd;
         initConfigJson(context);
         initPublicConfigJson(context);
         initselfadJson(context);
