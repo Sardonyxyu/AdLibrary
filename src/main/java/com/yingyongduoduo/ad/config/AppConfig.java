@@ -114,6 +114,8 @@ public class AppConfig {
      * @param adAddressType
      */
     public static void init(Context context, String adAddressType) {
+        // 初始化广告数据
+        initData(context);
         SpUtils.put("AdAddressType", adAddressType);
         init(context, true);
     }
@@ -124,6 +126,8 @@ public class AppConfig {
      * @param application
      */
     public static void initNormal(Context context, String application) {
+        // 初始化广告数据
+        initData(context);
         SpUtils.put("ServerAddress", "https://api.xgkjdytt.cn");
         initPackage(context, application);
     }
@@ -134,6 +138,8 @@ public class AppConfig {
      * @param application
      */
     public static void initDongTing(Context context, String application) {
+        // 初始化广告数据
+        initData(context);
         SpUtils.put("ServerAddress", "https://api.csdtkj.cn");
         initPackage(context, application);
     }
@@ -154,11 +160,7 @@ public class AppConfig {
      * @param isUmengIdConfig
      */
     private static void init(Context context, boolean isUmengIdConfig) {
-
         AppConfig.isUmengIdConfig = isUmengIdConfig;
-        // 初始化广告数据
-        initData(context);
-
         initConfigJson(context);
         initPublicConfigJson(context);
         initselfadJson(context);
