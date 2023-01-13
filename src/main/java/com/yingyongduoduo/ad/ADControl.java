@@ -818,7 +818,7 @@ public class ADControl {
      * @param context
      */
     private void showSelfCpControl(Context context){
-        if (AppConfig.isCommonServer) return;
+        if (AppConfig.isUmengIdConfig) return;
         ShowSelfCP(context);
     }
 
@@ -1055,7 +1055,7 @@ public class ADControl {
     }
 
     public void addSelfBannerControl(LinearLayout lyt, Activity context){
-        if (AppConfig.isCommonServer) return;
+        if (AppConfig.isUmengIdConfig) return;
         addSelfBanner(lyt, context);
     }
 

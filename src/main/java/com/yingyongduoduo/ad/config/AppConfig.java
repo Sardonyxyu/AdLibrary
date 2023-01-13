@@ -84,21 +84,21 @@ public class AppConfig {
     public static String Channel = "";
     public static String APPKEY = "";
 
-    public static boolean isCommonServer = true; // 是否是正常服务器
+    public static boolean isUmengIdConfig = true; // 是否是友盟id配置广告
 
     private final static String baseURL1 = "http://120.25.224.76/%s/";
     private final static String baseURL2 = "http://videodata.gz.bcebos.com/%s/";
     private final static String baseURL3 = "http://www.yingyongduoduo.com/%s/";
 
-    private final static String baseURLGetAdconfig = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getadconfig?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetPublicconfig = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getpublic?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetSelfad = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getselfad?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetZixun = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getzixun?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetVideo = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getvideo?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetGzh = "https://api.csdtkj.cn/xly/webcloud/jsonadconfig/getwxgzh?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
-    private final static String baseURLGetGzhImageURL = "https://api.csdtkj.cn/jsonadconfig/%s/yyddkj.jpg";
-    private final static String baseURLGetVideoparse = "https://api.csdtkj.cn/jsonadconfig/%s/videoparse.jar";
-    private final static String baseURLGetFmparse = "https://api.csdtkj.cn/jsonadconfig/%s/fmparse.jar";
+    private final static String baseURLGetAdconfig = "%s/xly/webcloud/jsonadconfig/getadconfig?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetPublicconfig = "%s/xly/webcloud/jsonadconfig/getpublic?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetSelfad = "%s/xly/webcloud/jsonadconfig/getselfad?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetZixun = "%s/xly/webcloud/jsonadconfig/getzixun?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetVideo = "%s/xly/webcloud/jsonadconfig/getvideo?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetGzh = "%s/xly/webcloud/jsonadconfig/getwxgzh?application=%s&apppackage=%s&appversion=%s&appmarket=%s&agencychannel=%s";
+    private final static String baseURLGetGzhImageURL = "%s/jsonadconfig/%s/yyddkj.jpg";
+    private final static String baseURLGetVideoparse = "%s/jsonadconfig/%s/videoparse.jar";
+    private final static String baseURLGetFmparse = "%s/jsonadconfig/%s/fmparse.jar";
 
     public static ConfigBean configBean;
     public static PublicConfigBean publicConfigBean;
@@ -109,36 +109,55 @@ public class AppConfig {
 
 
     /**
-     * 初始化广告配置
+     * 主服务器友盟id配置初始化广告
      * @param context
      * @param adAddressType
      */
     public static void init(Context context, String adAddressType) {
-        init(context, adAddressType, "", true);
+        SpUtils.put("AdAddressType", adAddressType);
+        init(context, true);
     }
 
     /**
-     * 动听服务器初始化广告配置
+     * 主服务器包名配置初始化广告
+     * @param context
+     * @param application
+     */
+    public static void initNormal(Context context, String application) {
+        SpUtils.put("ServerAddress", "https://api.xgkjdytt.cn");
+        initPackage(context, application);
+    }
+
+    /**
+     * 动听服务器包名配置初始化广告
      * @param context
      * @param application
      */
     public static void initDongTing(Context context, String application) {
-        init(context, "", application, false);
+        SpUtils.put("ServerAddress", "https://api.csdtkj.cn");
+        initPackage(context, application);
+    }
+
+    /**
+     * 包名配置初始化广告
+     * @param context
+     * @param application
+     */
+    public static void initPackage(Context context, String application) {
+        SpUtils.put("Application", application);
+        init(context, false);
     }
 
     /**
      * 初始化广告配置
      * @param context
-     * @param application
-     * @param isCommonServer
+     * @param isUmengIdConfig
      */
-    public static void init(Context context, String adAddressType, String application, boolean isCommonServer) {
+    private static void init(Context context, boolean isUmengIdConfig) {
 
-        AppConfig.isCommonServer = isCommonServer;
+        AppConfig.isUmengIdConfig = isUmengIdConfig;
         // 初始化广告数据
         initData(context);
-        SpUtils.put("AdAddressType", adAddressType);
-        SpUtils.put("Application", application);
 
         initConfigJson(context);
         initPublicConfigJson(context);
@@ -695,6 +714,10 @@ public class AppConfig {
         return getpubConfigJson;
     }
 
+    public static String getServerAddress(){
+        return (String) SpUtils.get("ServerAddress", "https://api.xgkjdytt.cn");
+    }
+
     public static String getApplicationName(){
         return (String) SpUtils.get("Application", "");
     }
@@ -705,12 +728,13 @@ public class AppConfig {
      * @return
      */
     public static String setConfigData(Context context, String url){
+        String serverAddress = getServerAddress(); // 服务器地址
         String application = getApplicationName(); // 对应项目
         String apppackage = PublicUtil.getAppPackage(context);  // 应用包名
         String appversion = PublicUtil.getVersionCode(context)+""; // 应用版本
         String appmarket = PublicUtil.metadata(context, "UMENG_CHANNEL"); // 应用市场
         String agencychannel = PublicUtil.metadata(context, "AGENCY_CHANNEL"); // 代理渠道
-        return String.format(url, application, apppackage, appversion, appmarket, agencychannel);
+        return String.format(url, serverAddress, application, apppackage, appversion, appmarket, agencychannel);
     }
 
     /**
@@ -719,14 +743,15 @@ public class AppConfig {
      * @return
      */
     public static String setConfigFileUrl(String url){
+        String serverAddress = getServerAddress(); // 服务器地址
         String application = getApplicationName(); // 对应项目
-        return String.format(url, application);
+        return String.format(url, serverAddress, application);
     }
 
     public static void initConfigJson(Context context) {
         String ConfigJson = "";
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
-        if (isCommonServer) {
+        if (isUmengIdConfig) {
             ConfigJson = getConfigJson(String.format(getBaseUrl1()+ "%s/", APPKEY) + "config.json");
             if (ConfigJson.isEmpty()) {
                 ConfigJson = getConfigJson(String.format(getBaseUrl2()+ "%s/", APPKEY) + "config.json");
@@ -749,7 +774,7 @@ public class AppConfig {
     public static void initPublicConfigJson(Context context) {
         String ConfigJson = "";
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
-        if (isCommonServer) {
+        if (isUmengIdConfig) {
             ConfigJson = getPubConfigJson(getBaseUrl1() + "publicconfig.json");
             if (ConfigJson.isEmpty()) {
                 ConfigJson = getPubConfigJson(getBaseUrl2() + "publicconfig.json");
@@ -813,7 +838,7 @@ public class AppConfig {
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         if (publicConfigBean != null && !"".equals(publicConfigBean.onlineVideoParseVersion) && !publicConfigBean.onlineVideoParseVersion.equals(mSettings.getString("onlineVideoParseVersion", ""))) {//需要更新videosourceVersion
             String VideoJson;
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 VideoJson = getVideoJson(getBaseUrl1() + "video/video.json");
                 if (VideoJson.isEmpty()) {
                     VideoJson = getVideoJson(getBaseUrl2() + "video/video.json");
@@ -908,7 +933,7 @@ public class AppConfig {
 
         if (publicConfigBean != null && !"".equals(publicConfigBean.selfadVersion) && !publicConfigBean.selfadVersion.equals(mSettings.getString("selfadVersion", ""))) {//需要更新
             String SelfadJson;
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 SelfadJson = getSelfadJson(getBaseUrl1() + "selfad/selfad.json");
                 if (SelfadJson.isEmpty()) {
                     SelfadJson = getSelfadJson(getBaseUrl2() + "selfad/selfad.json");
@@ -950,7 +975,7 @@ public class AppConfig {
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         String SelfadJson = "";
         if (publicConfigBean != null && !TextUtils.isEmpty(publicConfigBean.zixunVersion) && !publicConfigBean.zixunVersion.equals(mSettings.getString("zixunVersion", ""))) {//需要更新
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 SelfadJson = getZixunJson(getBaseUrl1() + "zixun/zixun.json");
                 if (SelfadJson.isEmpty()) {
                     SelfadJson = getZixunJson(getBaseUrl2() + "zixun/zixun.json");
@@ -1001,7 +1026,7 @@ public class AppConfig {
         Boolean isneedUpdate = publicConfigBean != null && !"".equals(publicConfigBean.videosourceVersion) && !publicConfigBean.videosourceVersion.equals(mSettings.getString("videosourceVersion", ""));
         if (isneedUpdate || (!(new File(youkulibPath).exists()) && publicConfigBean != null && !"".equals(publicConfigBean.videosourceVersion))) {//需要更新videosourceVersion 或者没有在目录下找到该jar,但是获取
             Boolean isSuccess = true;
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 try {
                     downloadjar(youkulibPath, getBaseUrl1() + "video/videoparse.jar");
                 } catch (Exception e1) {
@@ -1042,7 +1067,7 @@ public class AppConfig {
         boolean isneedUpdate = publicConfigBean != null && !"".equals(publicConfigBean.fmsourceVersion) && !publicConfigBean.fmsourceVersion.equals(mSettings.getString("fmsourceVersion", ""));
         if (isneedUpdate || (!(new File(fmlibPath).exists()) && publicConfigBean != null && !"".equals(publicConfigBean.fmsourceVersion))) {//需要更新videosourceVersion 或者没有在目录下找到该jar,但是获取
             boolean isSuccess = true;
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 try {
                     downloadjar(fmlibPath, getBaseUrl1() + "video/fmparse.jar");
                 } catch (Exception e1) {
@@ -1161,7 +1186,7 @@ public class AppConfig {
         SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         if (publicConfigBean != null && !"".equals(publicConfigBean.wxgzhversion) && !publicConfigBean.wxgzhversion.equals(mSettings.getString("wxgzhversion", ""))) {//需要更新
             String wxgzhJson;
-            if (isCommonServer) {
+            if (isUmengIdConfig) {
                 wxgzhJson = getWXGZHJson(getBaseUrl1() + "wxgzh/wxgzh.json");
                 if (wxgzhJson.isEmpty()) {
                     wxgzhJson = getWXGZHJson(getBaseUrl2() + "wxgzh/wxgzh.json");
@@ -1195,7 +1220,7 @@ public class AppConfig {
     }
 
     private static void initGZHPic(WXGZHBean bean) {
-        if (isCommonServer) {
+        if (isUmengIdConfig) {
             try {
                 downloadgzhjpg(bean, bean.thumb);
             } catch (Exception ethumb) {//这一步则表示下载失败
