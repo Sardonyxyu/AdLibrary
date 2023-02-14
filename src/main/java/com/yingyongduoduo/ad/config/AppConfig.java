@@ -1593,7 +1593,7 @@ public class AppConfig {
 
     public static String getBaiduMapNO() {
         if (configBean == null) {
-            return "©2022 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
+            return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
         }
         for (String str : configBean.mapnobaidu.split(",")) {
             String[] a = str.split(":");
@@ -1606,12 +1606,12 @@ public class AppConfig {
 
             }
         }
-        return "©2022 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
+        return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
     }
 
     public static String getGaodeMapNO() {
         if (configBean == null) {
-            return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
+            return "©2023 高德软件有限公司 GS京(2022)1061号 - 甲测资字11111093";
         }
         for (String str : configBean.mapnogaode.split(",")) {
             String[] a = str.split(":");
@@ -1624,7 +1624,7 @@ public class AppConfig {
 
             }
         }
-        return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
+        return "©2023 高德软件有限公司 GS京(2022)1061号 - 甲测资字11111093";
     }
 
     public static String getKPType() {
