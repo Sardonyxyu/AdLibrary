@@ -1611,7 +1611,7 @@ public class AppConfig {
 
     public static String getGaodeMapNO() {
         if (configBean == null) {
-            return "©2023 高德软件有限公司 GS京(2022)1061号 - 甲测资字11111093";
+            return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
         }
         for (String str : configBean.mapnogaode.split(",")) {
             String[] a = str.split(":");
@@ -1624,7 +1624,7 @@ public class AppConfig {
 
             }
         }
-        return "©2023 高德软件有限公司 GS京(2022)1061号 - 甲测资字11111093";
+        return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
     }
 
     public static String getKPType() {
