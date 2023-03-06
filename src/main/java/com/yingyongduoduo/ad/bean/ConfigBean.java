@@ -35,8 +35,7 @@ public class ConfigBean {
     public String noadVideowebchannel = "";//使用第三方去广告链接对web地址进行转化播放，这时候是给浏览器播放
     public String playonwebchannel = "";//使用网页播放的版本
     public String nomapnochannel = "";//是否显示地图审图号
-    public String mapnobaidu = "";//百度审图号
-    public String mapnogaode = "";//高德审图号
+    public String mapno = "";// 地图审图号
     public String nogzhchannel = "";
     public String bannertype = "";
     public String cptype = "";

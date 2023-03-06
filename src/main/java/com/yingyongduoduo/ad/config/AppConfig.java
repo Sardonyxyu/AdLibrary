@@ -465,11 +465,8 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "nomapnochannel")) {
                         bean.nomapnochannel = jo_channelInfo.getString("nomapnochannel");
                     }
-                    if (haveKey(jo_channelInfo, "mapnobaidu")) {
-                        bean.mapnobaidu = jo_channelInfo.getString("mapnobaidu");
-                    }
-                    if (haveKey(jo_channelInfo, "mapnogaode")) {
-                        bean.mapnogaode = jo_channelInfo.getString("mapnogaode");
+                    if (haveKey(jo_channelInfo, "mapno")) {
+                        bean.mapno = jo_channelInfo.getString("mapno");
                     }
                     if (haveKey(jo_channelInfo, "postype")) {
                         bean.postype = jo_channelInfo.getString("postype");
@@ -1591,11 +1588,11 @@ public class AppConfig {
         return true;
     }
 
-    public static String getBaiduMapNO() {
+    public static String getMapNO() {
         if (configBean == null) {
             return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
         }
-        for (String str : configBean.mapnobaidu.split(",")) {
+        for (String str : configBean.mapno.split(",")) {
             String[] a = str.split(":");
             if (a.length == 2) {
                 String versionItem = a[0];
@@ -1607,24 +1604,6 @@ public class AppConfig {
             }
         }
         return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
-    }
-
-    public static String getGaodeMapNO() {
-        if (configBean == null) {
-            return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
-        }
-        for (String str : configBean.mapnogaode.split(",")) {
-            String[] a = str.split(":");
-            if (a.length == 2) {
-                String versionItem = a[0];
-                String adNameItem = a[1];
-                if (versioncode.equals(versionItem)) {//平台与版本对应了，因为渠道已经选定了
-                    return adNameItem;
-                }
-
-            }
-        }
-        return "©2022 高德软件有限公司 GS(2021)6375号 - 甲测资字11111093";
     }
 
     public static String getKPType() {

@@ -5,4 +5,7 @@
     <color name="ad_prefix_white">#FFFFFF</color>
     <color name="ad_prefix_blue">#0A90E3</color>
     <color name="ad_prefix_blue_dark">#0A7CC3</color>
+
+    <color name="mapno">#575757</color>
+    <color name="mapno_background">#80EDEDED</color>
 </resources>
