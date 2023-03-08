@@ -30,6 +30,9 @@
             android:name="COMPANY_NAME"
             android:value="${COMPANY_NAME}" />
         <meta-data
+            android:name="MAP_NO"
+            android:value="${MAP_NO}" />
+        <meta-data
             android:name="KEFU_QQ"
             android:value="\${KEFU_QQ}" />
 
