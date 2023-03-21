@@ -1393,6 +1393,8 @@ public class AppConfig {
         if (configBean == null) {
             return false;
         }
+        if (TextUtils.isEmpty(configBean.nohaoping))
+            return false;
         for (String version : configBean.nohaoping.split(",")) {
             if (version.equals(versioncode)) {
                 return false;
