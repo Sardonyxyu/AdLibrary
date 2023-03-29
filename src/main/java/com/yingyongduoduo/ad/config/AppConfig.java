@@ -1590,10 +1590,8 @@ public class AppConfig {
         return true;
     }
 
-    public static String getMapNO() {
-        if (configBean == null) {
-            return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
-        }
+    public static String getOnLineMapNo() {
+        if (configBean == null) return null;
         for (String str : configBean.mapno.split(",")) {
             String[] a = str.split(":");
             if (a.length == 2) {
@@ -1602,10 +1600,9 @@ public class AppConfig {
                 if (versioncode.equals(versionItem)) {//平台与版本对应了，因为渠道已经选定了
                     return adNameItem;
                 }
-
             }
         }
-        return "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
+        return null;
     }
 
     public static String getKPType() {
