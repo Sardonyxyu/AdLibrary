@@ -547,6 +547,42 @@ public class ADControl {
         adsParent.addView(selfKPView);
     }
 
+    //初始化穿山甲广告
+    public static Boolean InitCSJPosAd(Activity context) {
+        if (AppConfig.isShowPosAD())//展示退屏广告
+        {
+            String kpType = AppConfig.getPOSType();//获取广告类型，baidu，gdt，google,csj
+            String kp_String = AppConfig.configBean.ad_pos_idMap.get(kpType);
+
+//            String kpType = "csj";
+//            String kp_String = "5224187,946870774";
+            if (!TextUtils.isEmpty(kp_String)) {
+                String[] a = kp_String.split(",");
+                if (a.length == 2) {
+                    String appid = a[0];
+                    String adplaceid = a[1];
+                    if ("csj".equals(kpType)) {
+                        ADManager.getInsatance().initPosAD(context, appid, adplaceid);
+                        return true;
+                    } else if ("csj2".equals(kpType)) {
+                        ADManager.getInsatance().initPosAD2(context, appid, adplaceid);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else//不展示开屏广告
+        {
+            return false;
+        }
+
+    }
+
     //初始化广点通退屏广告
     public static Boolean InitGDTMuBanTP(Context context) {
         if (AppConfig.isShowTP())//展示退屏广告
@@ -878,7 +914,7 @@ public class ADControl {
         }
     }
 
-    private void addCSJBanner(final LinearLayout lyt, final Activity context, final String appid, final String adplaceid) {
+    public void addCSJBanner(final LinearLayout lyt, final Activity context, final String appid, final String adplaceid) {
         if (mTTAd != null) {
             if (lyt != null)
                 lyt.removeAllViews();
@@ -1092,6 +1128,75 @@ public class ADControl {
 
     private UnifiedBannerView unifiedBannerView;
     private TTNativeExpressAd mTTAd;
+    private TTNativeExpressAd mPostAd;
+
+    public void addCSJPosAd(final LinearLayout lyt, Activity context) {
+        if (!AppConfig.isShowPosAD()) {
+            return;
+        }
+
+        if (mPostAd != null) {
+            mPostAd.destroy();
+            mPostAd = null;
+        }
+        if (!ADManager.getInsatance().getCsjADList().isEmpty()) {
+            mPostAd = ADManager.getInsatance().getCsjADList().remove(0);
+            if (ADManager.getInsatance().getCsjADList().size() <= 0) {
+                ADControl.InitCSJPosAd(context);
+            }
+        } else {
+            ADControl.InitCSJPosAd(context);
+        }
+
+        if (mPostAd == null) {
+            return;
+        }
+        mPostAd.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
+            @Override
+            public void onAdClicked(View view, int type) {
+            }
+
+            @Override
+            public void onAdShow(View view, int type) {
+            }
+
+            @Override
+            public void onRenderFail(View view, String msg, int code) {
+            }
+
+            @Override
+            public void onRenderSuccess(View view, float width, float height) {
+                //返回view的宽高 单位 dp
+                if (lyt != null) {
+                    lyt.removeAllViews();
+                    lyt.addView(view);
+                }
+            }
+        });
+        mPostAd.render();
+
+        //使用默认模板中默认dislike弹出样式
+        mPostAd.setDislikeCallback(context, new TTAdDislike.DislikeInteractionCallback() {
+            @Override
+            public void onShow() {
+
+            }
+
+            @Override
+            public void onSelected(int position, String value, boolean enforce) {
+                if (lyt != null) {
+                    lyt.removeAllViews();
+                }
+                //用户选择不喜欢原因后，移除广告展示
+                AppConfig.isCanShowBanner = false;
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+        });
+    }
 
     /**
      * 显示广告
@@ -1100,6 +1205,9 @@ public class ADControl {
      * @param context context
      */
     public void showAd(LinearLayout lyt, Activity context) {
+        if (ADManager.getInsatance().getCsjADList().isEmpty() || System.currentTimeMillis() - ADManager.initTime > 45 * 60 * 1000) {
+            InitCSJPosAd(context);
+        }
         ShowCp(context);
         homeGet5Score(context);
         if (AppConfig.isShowBanner() && lyt != null) {//展示广告条广告
@@ -1269,6 +1377,10 @@ public class ADControl {
         if (mInterAd != null) {
             mInterAd.destroy();
             mInterAd = null;
+        }
+        if (mPostAd != null) {
+            mPostAd.destroy();
+            mPostAd = null;
         }
     }
 

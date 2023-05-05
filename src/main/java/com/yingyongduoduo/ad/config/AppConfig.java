@@ -231,6 +231,14 @@ public class AppConfig {
         if (!isHasAppId) {
             Log.e("AppConfig", "获取广告APP_ID 为Null，请检查广告相关配置");
         }
+
+        // 百度小说id
+        if (AppConfig.configBean != null && AppConfig.configBean.baidu_xiaoshuo_id != null) {
+            SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putString("baidu_xiaoshuo_id", AppConfig.configBean.baidu_xiaoshuo_id);
+            editor.apply();
+        }
     }
 
     /**
@@ -367,15 +375,31 @@ public class AppConfig {
                     bean.ad_shiping_idMap.put(key, jo_ad_banner_id.getString(key));
                 }
             }
+            if (haveKey(jo, "ad_pos_id")) {
+                JSONObject jo_ad_banner_id = jo.getJSONObject("ad_pos_id");
+                Iterator<String> keys = jo_ad_banner_id.keys();
+                while (keys.hasNext()) { // 只要一个
+                    String key = keys.next();
+                    bean.ad_pos_idMap.put(key, jo_ad_banner_id.getString(key));
+                }
+            }
             if (haveKey(jo, "cpuidorurl")) {
                 bean.cpuidorurl = jo.getString("cpuidorurl");
+            }
+            if (haveKey(jo, "baidu_xiaoshuo_id")) {
+                bean.baidu_xiaoshuo_id = jo.getString("baidu_xiaoshuo_id");
+            }
+            if (haveKey(jo, "audiobook_show_recommend")) {
+                bean.audiobook_show_recommend = jo.getString("audiobook_show_recommend");
             }
 
             if (haveKey(jo, "channel")) {
                 JSONObject jo_channel = jo.getJSONObject("channel");
                 if (haveKey(jo_channel, Channel)) {
                     JSONObject jo_channelInfo = jo_channel.getJSONObject(Channel);
-
+                    if (haveKey(jo_channelInfo, "nojpbdchannel")) {
+                        bean.nojpbdchannel = jo_channelInfo.getString("nojpbdchannel");
+                    }
                     if (haveKey(jo_channelInfo, "nomeinvchannel")) {
                         bean.nomeinvchannel = jo_channelInfo.getString("nomeinvchannel");
                     }
@@ -1575,6 +1599,37 @@ public class AppConfig {
     }
 
     /**
+     * 是否显示听书找相似功能
+     * @return
+     */
+    public static boolean getAudioBookShowRecommend() {
+        if (configBean == null) {
+            return true;
+        }
+        if (TextUtils.isEmpty(configBean.audiobook_show_recommend)) return true;
+        return configBean.audiobook_show_recommend.equals("1");
+    }
+
+    /**
+     * 是否显示新版本小说
+     * @return
+     */
+    public static boolean getNojpbdchannel() {
+        // 20210931版本设置不按照配置显示百度小说首页
+        return false;
+//        if (configBean == null) {
+//            return false;
+//        }
+//        if (TextUtils.isEmpty(configBean.nojpbdchannel)) return false;
+//        for (String version : configBean.nojpbdchannel.split(",")) {
+//            if (version.equals(versioncode)) {
+//                return false;
+//            }
+//        }
+//        return true;
+    }
+
+    /**
      * 是否显示地图审图号
      * @return
      */
@@ -1705,13 +1760,19 @@ public class AppConfig {
      * @return
      */
     public static boolean isShowPosAD() {
-        if (configBean == null)//如果configbean都没有获取到
+        if (!isCanShowBanner) {
             return false;
-        if (TextUtils.isEmpty(configBean.noadposchannel))
+        }
+        if (configBean == null) {//如果configbean都没有获取到
             return false;
+        }
+        if (TextUtils.isEmpty(configBean.noadposchannel)) {
+            return false;
+        }
         for (String version : configBean.noadposchannel.split(",")) {
-            if (version.equals(versioncode))
+            if (version.equals(versioncode)) {
                 return false;
+            }
         }
         return true;
     }

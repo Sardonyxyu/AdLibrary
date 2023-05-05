@@ -42,6 +42,7 @@ public class SelfBannerView extends RelativeLayout {
         ad_close.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                AppConfig.isCanShowBanner = false;
                 rl_content.setVisibility(View.GONE);
                 System.out.println("广告被关闭");
             }

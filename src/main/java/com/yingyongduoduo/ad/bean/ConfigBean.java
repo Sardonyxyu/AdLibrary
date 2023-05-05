@@ -10,6 +10,7 @@ public class ConfigBean {
     public Map<String, String> ad_cp_idMap = new HashMap<String, String>();
     public Map<String, String> ad_tp_idMap = new HashMap<String, String>();
     public Map<String, String> ad_shiping_idMap = new HashMap<String, String>();
+    public Map<String, String> ad_pos_idMap = new HashMap<String, String>();
     public String cpuidorurl = "";//baidu的内容联盟的链接或者id，如果是链接，直接解析
     public String nomeinvchannel = "";
     public String noselfadchannel = "";
@@ -43,6 +44,9 @@ public class ConfigBean {
     public String tptype = "";
     public String postype = "";
     public String shipingtype = "";
+    public String nojpbdchannel = "";
+    public String baidu_xiaoshuo_id = ""; // 百度小说id
+    public String audiobook_show_recommend = ""; // 听书是否显示找相似功能
 
     public String nozhikouling = "";//没有吱口令的渠道
 }
