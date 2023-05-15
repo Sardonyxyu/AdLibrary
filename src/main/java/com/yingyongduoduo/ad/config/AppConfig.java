@@ -14,9 +14,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.bytedance.applog.AppLog;
-import com.bytedance.applog.InitConfig;
-import com.bytedance.applog.util.UriConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.qq.e.comm.managers.GDTAdSdk;
 import com.yingyongduoduo.ad.TTAdManagerHolder;
@@ -27,6 +24,7 @@ import com.yingyongduoduo.ad.bean.VideoBean;
 import com.yingyongduoduo.ad.bean.WXGZHBean;
 import com.yingyongduoduo.ad.bean.ZiXunItemBean;
 import com.yingyongduoduo.ad.bean.ZiXunListItemBean;
+import com.yingyongduoduo.ad.interfaces.CsjAdInitListener;
 import com.yingyongduoduo.ad.newad.PublicUtil;
 import com.yingyongduoduo.ad.utils.DownLoaderAPK;
 import com.yingyongduoduo.ad.utils.HttpUtil;
@@ -107,6 +105,7 @@ public class AppConfig {
     public static List<ADBean> selfadBeans = new ArrayList<>();
     public static List<ZiXunItemBean> ziXunBeans = new ArrayList<>();
     public static List<WXGZHBean> wxgzhBeans = new ArrayList<>();
+    private static CsjAdInitListener csjAdInitListener;
 
 
     /**
@@ -216,8 +215,7 @@ public class AppConfig {
                         String appid = a[0];
                         if (!TextUtils.isEmpty(appid)) {
                             if ("csj".equals(adType)) {
-                                TTAdManagerHolder.init(context.getApplicationContext(), appid);
-                                initCSJVideoAppLog(context);
+                                TTAdManagerHolder.init(context.getApplicationContext(), appid, csjAdInitListener);
                             } else if ("gdt".equals(adType)) {
                                 GDTAdSdk.init(context.getApplicationContext(), appid);
                             }
@@ -276,35 +274,6 @@ public class AppConfig {
             e.printStackTrace();
         }
         return "";
-    }
-
-    /**
-     * 初始化穿山甲VideoAppLog
-     * @param context
-     */
-    public static void initCSJVideoAppLog(Context context) {
-        String appId = PublicUtil.metadata(context, "CSJ_APPLOG_APPID");
-        if (TextUtils.isEmpty(appId)) {
-            return;
-        }
-        String umengChannel = PublicUtil.metadata(context, "UMENG_CHANNEL");
-        if ("360".equals(umengChannel)) {
-            umengChannel = "c360"; //友盟规定不要使用纯数字作为渠道ID
-        }
-        /* 初始化开始，appid和渠道，appid如不清楚请联系客户成功经理
-         * 注意第二个参数 channel 不能为空
-         */
-        final InitConfig config = new InitConfig(appId, umengChannel);
-        //上报地址
-        config.setUriConfig (UriConstants.DEFAULT);
-        // 加密开关，SDK 5.5.1 及以上版本支持，false 为关闭加密，上线前建议设置为 true
-        AppLog.setEncryptAndCompress(true);
-
-        config.setAutoStart(true);
-        /* 初始化结束 */
-        config.setAutoStart(true);
-
-        AppLog.init(context, config);
     }
 
     /**
@@ -2025,5 +1994,13 @@ public class AppConfig {
         }
         return false;
 
+    }
+
+    public CsjAdInitListener getCsjAdInitListener() {
+        return csjAdInitListener;
+    }
+
+    public static void setCsjAdInitListener(CsjAdInitListener csjAdInitListener) {
+        AppConfig.csjAdInitListener = csjAdInitListener;
     }
 }

@@ -1,16 +1,12 @@
 package com.yingyongduoduo.ad;
 
-import android.app.ActivityManager;
 import android.content.Context;
-import android.os.Process;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
-import com.yingyongduoduo.ad.media.MediaInitHelper;
-import com.yingyongduoduo.ad.newad.PublicUtil;
+import com.yingyongduoduo.ad.interfaces.CsjAdInitListener;
 
 
 /**
@@ -22,14 +18,16 @@ public class TTAdManagerHolder {
 
     private static boolean sInit;
     private static String appId;
+    private static CsjAdInitListener csjAdInitListener;
 
 
     public static TTAdManager get() {
         return TTAdSdk.getAdManager();
     }
 
-    public static void init(final Context context, String appId) {
+    public static void init(final Context context, String appId, CsjAdInitListener csjAdInitListener) {
         TTAdManagerHolder.appId = appId;
+        TTAdManagerHolder.csjAdInitListener = csjAdInitListener;
         doInit(context);
     }
 
@@ -41,10 +39,7 @@ public class TTAdManagerHolder {
                 @Override
                 public void success() {
                     Log.i(TAG, "success: "+ TTAdSdk.isInitSuccess());
-                    String appId = PublicUtil.metadata(context, "CSJ_APPLOG_APPID");
-                    if (!TextUtils.isEmpty(appId)) {
-                        initDP(context);
-                    }
+                    if (csjAdInitListener != null) csjAdInitListener.onSucceed();
                 }
 
                 @Override
@@ -69,25 +64,4 @@ public class TTAdManagerHolder {
                 .build();
     }
 
-    /**
-     * 初始化流媒体(小视频、直播)sdk，若未接入流媒体，请忽略
-     */
-    private static void initDP(Context context) {
-        boolean isMainProcess = context.getPackageName().equals(getCurrentProcessName(context));
-        if (isMainProcess) {
-            MediaInitHelper.init(context);
-        }
-    }
-
-    private static String getCurrentProcessName(Context context) {
-        int pid = Process.myPid();
-        String processName = "";
-        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningAppProcessInfo process : manager.getRunningAppProcesses()) {
-            if (process.pid == pid) {
-                processName = process.processName;
-            }
-        }
-        return processName;
-    }
 }

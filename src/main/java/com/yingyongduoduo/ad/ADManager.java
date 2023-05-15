@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Created by yingyongduoduo on 2018/8/9.
  */
-
 public class ADManager {
     private static class SingletonHolder {
         private static final ADManager instance = new ADManager();
