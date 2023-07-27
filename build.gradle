@@ -62,9 +62,9 @@ dependencies {
     api 'com.facebook.fresco:fresco:1.12.0'
     api 'com.facebook.fresco:animated-gif:1.12.0'
     // 友盟统计SDK
-    api 'com.umeng.umsdk:common:9.5.4'// 必选
+    api 'com.umeng.umsdk:common:9.5.6'// 必选
     api 'com.umeng.umsdk:asms:1.6.3'// 必选
-    api 'com.umeng.umsdk:apm:1.8.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+    api 'com.umeng.umsdk:apm:1.9.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
 
     api "com.github.bumptech.glide:glide:4.9.0"
     api ("com.github.bumptech.glide:recyclerview-integration:4.9.0") {
@@ -76,8 +76,8 @@ dependencies {
     implementation 'de.greenrobot:eventbus:3+'
 
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    api 'com.qq.e.union:union:4.500.1370'
+    api 'com.qq.e.union:union:4.530.1400'
 
-    api 'com.pangle.cn:ads-sdk-pro:5.2.0.5'
+    api 'com.pangle.cn:ads-sdk-pro:5.4.1.6'
 }
 
