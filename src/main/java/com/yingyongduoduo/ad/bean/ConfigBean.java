@@ -25,6 +25,7 @@ public class ConfigBean {
     public String noadcpchannel = "";//没有插屏的版本
     public String nopaychannel = "";//不用付费的版本
     public String noshipingadchannel = "";//没有视频广告的版本
+    public String noshortvideochannel = "";//没有短视频的版本
     public String nodownloadtaskchannel = "";//没有下载任务的版本
     public String noadposchannel = "";//没有消息流的版本
     public String isfirstfreeusechannel = "";//首次免费版本

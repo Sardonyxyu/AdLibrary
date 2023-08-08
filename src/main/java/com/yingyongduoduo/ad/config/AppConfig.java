@@ -405,6 +405,9 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "noshipingadchannel")) {
                         bean.noshipingadchannel = jo_channelInfo.getString("noshipingadchannel");
                     }
+                    if (haveKey(jo_channelInfo, "noshortvideochannel")) {
+                        bean.noshortvideochannel = jo_channelInfo.getString("noshortvideochannel");
+                    }
                     if (haveKey(jo_channelInfo, "nodownloadtaskchannel")) {
                         bean.nodownloadtaskchannel = jo_channelInfo.getString("nodownloadtaskchannel");
                     }
@@ -1506,6 +1509,24 @@ public class AppConfig {
         if(TextUtils.isEmpty(configBean.noshowdschannel))
             return false;
         for (String version : configBean.noshowdschannel.split(",")) {
+            if (version.equals(versioncode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 是否显示短视频
+     * @return
+     */
+    public static boolean isShowShortVideo() {
+        if (configBean == null) {
+            return false;
+        }
+        if(TextUtils.isEmpty(configBean.noshortvideochannel))
+            return false;
+        for (String version : configBean.noshortvideochannel.split(",")) {
             if (version.equals(versioncode)) {
                 return false;
             }
