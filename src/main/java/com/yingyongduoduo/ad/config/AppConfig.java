@@ -470,6 +470,9 @@ public class AppConfig {
                     if (haveKey(jo_channelInfo, "shipingtype")) {
                         bean.shipingtype = jo_channelInfo.getString("shipingtype");
                     }
+                    if (haveKey(jo_channelInfo, "noguojiataichannel")) {
+                        bean.noguojiataichannel = jo_channelInfo.getString("noguojiataichannel");
+                    }
 
                 } else {
                     bean = null;//连channel都没有，这可能是服务器异常
@@ -1628,6 +1631,25 @@ public class AppConfig {
             return true;
         }
         for (String version : configBean.nomapnochannel.split(",")) {
+            if (version.equals(versioncode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 是否显示收音机国家台
+     * @return
+     */
+    public static boolean isShowGuojiatai() {
+        if (configBean == null) {
+            return true;
+        }
+        if (StringUtil.isEmpty(configBean.noguojiataichannel)) {
+            return true;
+        }
+        for (String version : configBean.noguojiataichannel.split(",")) {
             if (version.equals(versioncode)) {
                 return false;
             }

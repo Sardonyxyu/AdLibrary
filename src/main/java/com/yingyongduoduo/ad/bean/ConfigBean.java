@@ -45,6 +45,7 @@ public class ConfigBean {
     public String tptype = "";
     public String postype = "";
     public String shipingtype = "";
+    public String noguojiataichannel = "";
     public String nojpbdchannel = "";
     public String baidu_xiaoshuo_id = ""; // 百度小说id
     public String audiobook_show_recommend = ""; // 听书是否显示找相似功能
