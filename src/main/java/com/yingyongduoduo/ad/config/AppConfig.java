@@ -217,7 +217,17 @@ public class AppConfig {
                             if ("csj".equals(adType)) {
                                 TTAdManagerHolder.init(context.getApplicationContext(), appid, csjAdInitListener);
                             } else if ("gdt".equals(adType)) {
-                                GDTAdSdk.init(context.getApplicationContext(), appid);
+                                GDTAdSdk.initWithoutStart(context.getApplicationContext(), appid);
+                                GDTAdSdk.start(new GDTAdSdk.OnStartListener() {
+                                    @Override
+                                    public void onStartSuccess() {
+                                        // 推荐开发者在onStartSuccess回调后开始拉广告
+                                    }
+                                    @Override
+                                    public void onStartFailed(Exception e) {
+                                        Log.e("gdt onStartFailed:", e.toString());
+                                    }
+                                });
                             }
                             isHasAppId = true;
                         }

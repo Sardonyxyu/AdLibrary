@@ -32,6 +32,7 @@ buildscript {
         mavenCentral()
         google()
         maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://artifact.bytedance.com/repository/pangle' }
     }
 
     dependencies {
@@ -76,8 +77,8 @@ dependencies {
     implementation 'de.greenrobot:eventbus:3+'
 
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    api 'com.qq.e.union:union:4.530.1400'
+    api 'com.qq.e.union:union:4.563.1433'
 
-    api 'com.pangle.cn:ads-sdk-pro:5.4.1.6'
+    api 'com.pangle.cn:mediation-sdk:5.9.2.8'
 }
 

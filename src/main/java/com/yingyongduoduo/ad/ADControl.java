@@ -373,7 +373,7 @@ public class ADControl {
 
         mTTAdNative.loadSplashAd(adSlot, new TTAdNative.CSJSplashAdListener() {
             @Override
-            public void onSplashLoadSuccess() {
+            public void onSplashLoadSuccess(CSJSplashAd csjSplashAd) {
 
             }
 

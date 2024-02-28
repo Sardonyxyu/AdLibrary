@@ -142,3 +142,14 @@
     native <methods>;
 }
 
+# 聚合混淆
+-keep class bykvm*.**
+-keep class com.bytedance.msdk.adapter.**{ public *; }
+-keep class com.bytedance.msdk.api.** {
+ public *;
+}
+-keep class com.bytedance.msdk.base.TTBaseAd{*;}
+-keep class com.bytedance.msdk.adapter.TTAbsAdLoaderAdapter{
+    public *;
+    protected <fields>;
+}
