@@ -928,7 +928,7 @@ public class ADControl {
             AdSlot adSlot = new AdSlot.Builder()
                     .setCodeId(adplaceid) //广告位id
                     .setAdCount(1) //请求广告数量为1到3条
-                    .setExpressViewAcceptedSize(ScreenUtils.getScreenWidth(context), ScreenUtils.dp2px(context, 60)) //期望模板广告view的size,单位dp
+                    .setExpressViewAcceptedSize(ScreenUtils.px2dp(context, ScreenUtils.getScreenWidth(context)), 60) //期望模板广告view的size,单位dp
 //                    .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP) // 应用每次下载都需要触发弹窗披露应用信息（不含跳转商店的场景），该配置优先级高于下载网络弹窗配置；
                     .build();
             //step5:请求广告，对请求回调的广告作渲染处理
