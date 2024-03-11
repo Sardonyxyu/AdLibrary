@@ -692,7 +692,6 @@ public class ADControl {
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(adplaceid)
                 //模板广告需要设置期望个性化模板广告的大小,单位dp,激励视频场景，只要设置的值大于0即可
-                .setExpressViewAcceptedSize(500,500)
                 .setSupportDeepLink(true)
                 .setOrientation(TTAdConstant.VERTICAL)//必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .setAdLoadType(PRELOAD)//推荐使用，用于标注此次的广告请求用途为预加载（当做缓存）还是实时加载，方便后续为开发者优化相关策略
@@ -928,9 +927,8 @@ public class ADControl {
             //step4:创建广告请求参数AdSlot,具体参数含义参考文档
             AdSlot adSlot = new AdSlot.Builder()
                     .setCodeId(adplaceid) //广告位id
-
                     .setAdCount(1) //请求广告数量为1到3条
-                    .setExpressViewAcceptedSize(ScreenUtils.getScreenWidth(context), 60) //期望模板广告view的size,单位dp
+                    .setExpressViewAcceptedSize(ScreenUtils.getScreenWidth(context), ScreenUtils.dp2px(context, 60)) //期望模板广告view的size,单位dp
 //                    .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP) // 应用每次下载都需要触发弹窗披露应用信息（不含跳转商店的场景），该配置优先级高于下载网络弹窗配置；
                     .build();
             //step5:请求广告，对请求回调的广告作渲染处理
