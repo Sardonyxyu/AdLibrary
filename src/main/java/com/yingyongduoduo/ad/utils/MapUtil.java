@@ -10,7 +10,7 @@ public class MapUtil {
    /**
     * 默认显示的审图号
     */
-   private static final String defaultMapNo = "©2023 北京百度网讯科技有限公司 - GS(2021)6026号 - 甲测资字11111342";
+   private static final String defaultMapNo = "©2022 高德软件有限公司 GS（2021）6375号 - 甲测资字11111093";
 
 
    /**
