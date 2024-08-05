@@ -79,7 +79,7 @@ dependencies {
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
     api 'com.qq.e.union:union:4.575.1445'
 
-    provided files('libs/open_ad_sdk_6.2.1.5.aar')
+    implementation project(':LocalCsjSdk:Csjaar')
 //    api 'com.pangle.cn:mediation-sdk:6.1.2.5'
 }
 

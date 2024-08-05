@@ -1,0 +1,3 @@
+include ':AdLibrary'
+include ':LocalCsjSdk:Csjaar'
+rootProject.name = "AdLibrary"
