@@ -57,7 +57,7 @@ public class TTAdManagerHolder {
         return new TTAdConfig.Builder()
                 .appId(appId)
 //                .useMediation(true)//开启聚合功能，默认false
-                .useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
+//                .useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
                 .allowShowNotify(true) //是否允许sdk展示通知栏提示
                 .debug(false) //测试阶段打开，可以通过日志排查问题，上线时去除该调用
                 .directDownloadNetworkType() //允许直接下载的网络状态集合,没有设置的网络下点击下载apk会有二次确认弹窗，弹窗中会披露应用信息
