@@ -6,6 +6,8 @@ import android.util.Log;
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.bytedance.sdk.openadsdk.TTCustomController;
+import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig;
 import com.yingyongduoduo.ad.interfaces.CsjAdInitListener;
 
 
@@ -56,6 +58,7 @@ public class TTAdManagerHolder {
     private static TTAdConfig buildConfig(Context context) {
         return new TTAdConfig.Builder()
                 .appId(appId)
+                .customController(getTTCustomController()) // 隐私合规设置
 //                .useMediation(true)//开启聚合功能，默认false
 //                .useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
                 .allowShowNotify(true) //是否允许sdk展示通知栏提示
@@ -66,4 +69,66 @@ public class TTAdManagerHolder {
                 .build();
     }
 
+    //函数返回值表示隐私开关开启状态，未重写函数使用默认值
+    private static TTCustomController getTTCustomController(){
+        return new TTCustomController() {
+
+            @Override
+            public boolean isCanUseLocation() {
+                // 是否允许SDK主动使用地理位置信息
+                return false;
+            }
+
+            @Override
+            public boolean isCanUseWifiState() {
+                return super.isCanUseWifiState();
+            }
+
+            @Override
+            public String getMacAddress() {
+                return super.getMacAddress();
+            }
+
+            @Override
+            public boolean isCanUseWriteExternal() {
+                return super.isCanUseWriteExternal();
+            }
+
+            @Override
+            public String getDevOaid() {
+                return super.getDevOaid();
+            }
+
+            @Override
+            public boolean isCanUseAndroidId() {
+                return super.isCanUseAndroidId();
+            }
+
+            @Override
+            public String getAndroidId() {
+                return super.getAndroidId();
+            }
+
+            @Override
+            public MediationPrivacyConfig getMediationPrivacyConfig() {
+                return new MediationPrivacyConfig() {
+
+                    @Override
+                    public boolean isLimitPersonalAds() {
+                        return super.isLimitPersonalAds();
+                    }
+
+                    @Override
+                    public boolean isProgrammaticRecommend() {
+                        return super.isProgrammaticRecommend();
+                    }
+                };
+            }
+
+            @Override
+            public boolean isCanUsePermissionRecordAudio() {
+                return super.isCanUsePermissionRecordAudio();
+            }
+        };
+    }
 }
