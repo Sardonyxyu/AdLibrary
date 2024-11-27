@@ -79,6 +79,6 @@ dependencies {
 //    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
     api 'com.qq.e.union:union:4.575.1445'
 
-    api 'com.pangle.cn:mediation-sdk:6.3.1.7'
+    api 'com.pangle.cn:mediation-sdk:6.4.1.5'
 }
 
