@@ -1421,6 +1421,9 @@ public class AppConfig {
         if (configBean == null) {
             return false;
         }
+        if (StringUtil.isEmpty(configBean.noadbannerchannel)) {
+            return false;
+        }
         for (String version : configBean.noadbannerchannel.split(",")) {
             if (version.equals(versioncode)) {
                 return false;
@@ -1431,6 +1434,9 @@ public class AppConfig {
 
     public static boolean isShowKP() {
         if (configBean == null) {//如果configbean都没有获取到
+            return false;
+        }
+        if (StringUtil.isEmpty(configBean.noadkpchannel)) {
             return false;
         }
         for (String version : configBean.noadkpchannel.split(",")) {
@@ -1455,6 +1461,9 @@ public class AppConfig {
 
     public static boolean isShowCP() {
         if (configBean == null) {
+            return false;
+        }
+        if (StringUtil.isEmpty(configBean.noadcpchannel)) {
             return false;
         }
         for (String version : configBean.noadcpchannel.split(",")) {
