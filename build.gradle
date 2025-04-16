@@ -76,8 +76,9 @@ dependencies {
 
     implementation 'de.greenrobot:eventbus:3+'
 
-//    //GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
-    api 'com.qq.e.union:union:4.575.1445'
+    // GDT优量汇广告SDK：https://developers.adnet.qq.com/doc/android/union/union_version
+    // 新页面Android SDK版本历史：https://adnet.qq.com/resource/sdk/changelog/android
+    api 'com.qq.e.union:union:4.630.1500'
 
     api 'com.pangle.cn:mediation-sdk:6.5.0.2'
 }

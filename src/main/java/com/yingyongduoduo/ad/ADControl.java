@@ -507,7 +507,7 @@ public class ADControl {
             }
         };
         SplashAD splashAD = new SplashAD((Activity) context, adplaceid, listener, 0);
-        splashAD.fetchAndShowIn(adsParent);
+        splashAD.fetchFullScreenAdOnly();
     }
 
     private void ShowSelfKP(final Context context, RelativeLayout adsParent, final ADListener kpAdListener) {
