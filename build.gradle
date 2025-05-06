@@ -80,6 +80,6 @@ dependencies {
     // 新页面Android SDK版本历史：https://adnet.qq.com/resource/sdk/changelog/android
     api 'com.qq.e.union:union:4.630.1500'
 
-    api 'com.pangle.cn:mediation-sdk:6.5.0.2'
+    api 'com.pangle.cn:mediation-sdk:6.6.0.7'
 }
 
