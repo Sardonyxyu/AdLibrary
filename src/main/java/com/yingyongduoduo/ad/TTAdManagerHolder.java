@@ -80,6 +80,24 @@ public class TTAdManagerHolder {
             }
 
             @Override
+            public boolean isCanUseAndroidId() {
+                // 是否获取AndroidId
+                return false;
+            }
+
+            @Override
+            public String getAndroidId() {
+                // 返回AndroidId
+                return "";
+            }
+
+            @Override
+            public boolean alist() {
+                // 是否获取已安装包名列表
+                return false;
+            }
+
+            @Override
             public boolean isCanUseWifiState() {
                 return super.isCanUseWifiState();
             }
@@ -97,16 +115,6 @@ public class TTAdManagerHolder {
             @Override
             public String getDevOaid() {
                 return super.getDevOaid();
-            }
-
-            @Override
-            public boolean isCanUseAndroidId() {
-                return super.isCanUseAndroidId();
-            }
-
-            @Override
-            public String getAndroidId() {
-                return super.getAndroidId();
             }
 
             @Override
