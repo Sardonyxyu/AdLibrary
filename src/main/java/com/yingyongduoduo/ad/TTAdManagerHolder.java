@@ -98,6 +98,12 @@ public class TTAdManagerHolder {
             }
 
             @Override
+            public String getDevOaid() {
+                // 是否获取Oaid
+                return "";
+            }
+
+            @Override
             public boolean isCanUseWifiState() {
                 return super.isCanUseWifiState();
             }
@@ -110,11 +116,6 @@ public class TTAdManagerHolder {
             @Override
             public boolean isCanUseWriteExternal() {
                 return super.isCanUseWriteExternal();
-            }
-
-            @Override
-            public String getDevOaid() {
-                return super.getDevOaid();
             }
 
             @Override
