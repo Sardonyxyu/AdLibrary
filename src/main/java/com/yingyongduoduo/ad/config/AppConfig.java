@@ -204,7 +204,8 @@ public class AppConfig {
      */
     private static void initAdSDK(Context context) {
         boolean isHasAppId = false;
-        if (AppConfig.configBean != null && AppConfig.configBean.ad_kp_idMap != null) {
+        // 加上判断是否需要显示广告，不需要时不初始化
+        if (AppConfig.configBean != null && AppConfig.configBean.ad_kp_idMap != null && isShowAd()) {
             Set<Map.Entry<String, String>> entries = AppConfig.configBean.ad_kp_idMap.entrySet();
             for (Map.Entry<String, String> entry : entries) {
                 String adType = entry.getKey();
@@ -247,6 +248,14 @@ public class AppConfig {
             editor.putString("baidu_xiaoshuo_id", AppConfig.configBean.baidu_xiaoshuo_id);
             editor.apply();
         }
+    }
+
+    /**
+     * 判断是否需要显示广告：判断开屏、插屏、banner是否显示
+     * @return
+     */
+    public static boolean isShowAd() {
+        return isShowKP() || isShowCP() || isShowBanner();
     }
 
     /**
