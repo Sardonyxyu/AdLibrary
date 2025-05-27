@@ -8,7 +8,12 @@ import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTCustomController;
 import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig;
+import com.umeng.commonsdk.UMConfigure;
 import com.yingyongduoduo.ad.interfaces.CsjAdInitListener;
+import com.yingyongduoduo.ad.utils.SpUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,6 +25,7 @@ public class TTAdManagerHolder {
 
     private static boolean sInit;
     private static String appId;
+    private static boolean isGetOaid;
     private static CsjAdInitListener csjAdInitListener;
 
 
@@ -30,7 +36,22 @@ public class TTAdManagerHolder {
     public static void init(final Context context, String appId, CsjAdInitListener csjAdInitListener) {
         TTAdManagerHolder.appId = appId;
         TTAdManagerHolder.csjAdInitListener = csjAdInitListener;
+        // 获取友盟的OAID
+        getUmengOaid(context);
         doInit(context);
+    }
+
+    private static void getUmengOaid(Context context) {
+        try {
+            if (!isGetOaid) {
+                isGetOaid = true;
+                UMConfigure.getOaid(context, s -> {
+                    SpUtils.put("umeng_oaid", s);
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //step1:接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
@@ -99,8 +120,16 @@ public class TTAdManagerHolder {
 
             @Override
             public String getDevOaid() {
-                // 是否获取Oaid
-                return "";
+                // 是否获取Oaid，缓存获取友盟的Oaid
+                return (String) SpUtils.get("umeng_oaid", "");
+            }
+
+            @Override
+            public Map<String, Object> userPrivacyConfig() {
+                Map<String, Object> map = new HashMap<>();
+                // 控制oaid获取频率，"0"表示关闭，"1"或者其他值表示打开。
+                map.put("mcod", "0");
+                return map;
             }
 
             @Override
