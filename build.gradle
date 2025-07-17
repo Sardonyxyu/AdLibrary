@@ -33,6 +33,7 @@ buildscript {
         google()
         maven { url 'https://repo1.maven.org/maven2/' }
         maven { url 'https://artifact.bytedance.com/repository/pangle' }
+        maven {url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"}
     }
 
     dependencies {
@@ -45,6 +46,7 @@ buildscript {
             maven { url 'https://jitpack.io' }
             maven { url 'https://repo1.maven.org/maven2/' }
             maven { url 'https://artifact.bytedance.com/repository/pangle' }
+            maven {url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"}
             google()
             flatDir {
                 dirs 'libs'
@@ -80,6 +82,7 @@ dependencies {
     // 新页面Android SDK版本历史：https://adnet.qq.com/resource/sdk/changelog/android
     api 'com.qq.e.union:union:4.630.1500'
 
-    api 'com.pangle.cn:mediation-sdk:6.6.0.7'
+//    api 'com.pangle.cn:mediation-sdk:6.9.0.6'
+    api 'com.pangle_beta.cn:mediation-sdk:7.0.1.2'
 }
 
