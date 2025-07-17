@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yingyongduoduo.ad">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 兼容仅支持minSdkVersion为24，即兼容的最小手机系统版本为7.0 -->
+    <uses-sdk tools:overrideLibrary=" com.bytedance.gromore,com.bytedance.sdk.openadsdk,com.bytedance.msdk.adapter.admob,com.bytedance.msdk.adapter.BaiduMobAds,com.bytedance.msdk.adapter.gdt,com.bytedance.msdk.adapter.ks,com.bytedance.msdk.adapter.mintegral,com.bytedance.msdk.adapter.sigmob,com.bytedance.msdk.adapter.unity,com.bytedance.msdk.adapter.xiaomi,com.bytedance.tools"/>
 
     <application
         android:supportsRtl="true">
