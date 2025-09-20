@@ -65,9 +65,14 @@ dependencies {
     api 'com.facebook.fresco:fresco:1.12.0'
     api 'com.facebook.fresco:animated-gif:1.12.0'
     // 友盟统计SDK
-    api 'com.umeng.umsdk:common:9.6.7'// 必选
+    api 'com.umeng.umsdk:common:9.8.8'// 必选
     api 'com.umeng.umsdk:asms:1.8.0'// 必选
     api 'com.umeng.umsdk:apm:1.9.4' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+
+//    // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库
+//    implementation  'com.umeng.umsdk:common:+'// 必选
+//    implementation  'com.umeng.umsdk:asms:+'// 必选
+//    implementation 'com.umeng.umsdk:uyumao:+' // 高级运营分析功能依赖库，使用U-App卸载分析、开启反作弊能力请务必集成。common需搭配v9.6.3及以上版本，asms需搭配v1.7.0及以上版本。需更新隐私声明。
 
     api "com.github.bumptech.glide:glide:4.9.0"
     api ("com.github.bumptech.glide:recyclerview-integration:4.9.0") {
