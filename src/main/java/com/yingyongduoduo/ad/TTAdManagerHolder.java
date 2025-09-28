@@ -133,13 +133,14 @@ public class TTAdManagerHolder {
             }
 
             @Override
-            public boolean isCanUseWifiState() {
-                return super.isCanUseWifiState();
+            public String getMacAddress() {
+                // 返回MAC地址
+                return "";
             }
 
             @Override
-            public String getMacAddress() {
-                return super.getMacAddress();
+            public boolean isCanUseWifiState() {
+                return super.isCanUseWifiState();
             }
 
             @Override
