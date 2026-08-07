@@ -1139,13 +1139,13 @@ public class AppConfig {
 //                downloadjar(String.format(getDongTingServerBaseUrl() + appstoreDownloadUrl, APPLICATION), appstorePath);
 //            } catch (Exception e) {
             try {
-                downloadjar(String.format(getBaseUrl1()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+                downloadjar(aitoolPath, getBaseUrl1() + "video/aitool.jar");
             } catch (Exception e1) {
                 try {
-                    downloadjar(String.format(getBaseUrl2()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+                    downloadjar(aitoolPath, getBaseUrl2() + "video/aitool.jar");
                 } catch (Exception e2) {
                     try {
-                        downloadjar(String.format(getBaseUrl3()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+                        downloadjar(aitoolPath, getBaseUrl3() + "video/aitool.jar");
                     } catch (Exception e3) {//这一步则表示下载失败
                         isSuccess = false;
                     }
