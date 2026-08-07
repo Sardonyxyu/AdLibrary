@@ -77,6 +77,7 @@ public class AppConfig {
     public static String fmlibPath; // 收音机反射调用接口JAR包
     public static String youkulibPath;
     public static String GZHPath;
+    public static String aitoolPath;
 
     public static String versioncode = "";
     public static String Channel = "";
@@ -170,6 +171,7 @@ public class AppConfig {
         initVideoJson(context);
         initfmsourceVersion(context);
         initvideosourceVersion(context);
+        initAitoolJarResource(context);
 
         initAdSDK(context);
     }
@@ -281,6 +283,7 @@ public class AppConfig {
         AppConfig.URL_START_HTML = String.format("%s" + AppConfig.START_HTML_LOCAL_PATH, "file://");
         AppConfig.youkulibPath = context.getCacheDir() + File.separator + "videoparse.jar";// 初始化引擎存放位置
         AppConfig.fmlibPath = context.getCacheDir() + File.separator + "fmparse.jar";
+        AppConfig.aitoolPath = context.getCacheDir() + File.separator + "aitool.jar";
         AppConfig.GZHPath = context.getCacheDir() + "/tv1/app/gzh/";// 公众号的目录不能用缓存目录
     }
 
@@ -521,6 +524,9 @@ public class AppConfig {
             }
             if (haveKey(jo, "zixunVersion")) {
                 bean.zixunVersion = jo.getString("zixunVersion");
+            }
+            if (haveKey(jo, "aitooljarversion")) {
+                bean.aitooljarversion = jo.getString("aitooljarversion");
             }
             if (haveKey(jo, "dashangContent")) {
                 bean.dashangContent = jo.getString("dashangContent");
@@ -1119,6 +1125,42 @@ public class AppConfig {
                 deleteFile(fmlibPath);
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putString("fmsourceVersion", "");
+                editor.apply();
+            }
+        }
+    }
+
+    public static void initAitoolJarResource(Context context) {
+        SharedPreferences mSettings = context.getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        boolean isneedUpdate = publicConfigBean != null && !"".equals(publicConfigBean.aitooljarversion) && !publicConfigBean.aitooljarversion.equals(mSettings.getString("aitoolJarversion", ""));
+        if (isneedUpdate || (!TextUtils.isEmpty(aitoolPath) && !(new File(aitoolPath).exists()) && publicConfigBean != null && !"".equals(publicConfigBean.aitooljarversion))) {//需要更新videosourceVersion 或者没有在目录下找到该jar,但是获取
+            boolean isSuccess = true;
+//            try {
+//                downloadjar(String.format(getDongTingServerBaseUrl() + appstoreDownloadUrl, APPLICATION), appstorePath);
+//            } catch (Exception e) {
+            try {
+                downloadjar(String.format(getBaseUrl1()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+            } catch (Exception e1) {
+                try {
+                    downloadjar(String.format(getBaseUrl2()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+                } catch (Exception e2) {
+                    try {
+                        downloadjar(String.format(getBaseUrl3()+ "%s/", APPKEY) + "video/aitool.jar", aitoolPath);
+                    } catch (Exception e3) {//这一步则表示下载失败
+                        isSuccess = false;
+                    }
+                }
+            }
+//            }
+
+            if (isSuccess) {
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("aitoolJarversion", publicConfigBean.aitooljarversion);
+                editor.apply();
+            } else {
+                deleteFile(aitoolPath);
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("aitoolJarversion", "");
                 editor.apply();
             }
         }
